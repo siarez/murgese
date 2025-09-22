@@ -22,6 +22,8 @@ class MainWindow(QtWidgets.QMainWindow):
         root.setContentsMargins(8, 8, 8, 8)
         root.setSpacing(8)
 
+        self._num_sections = 15
+
         # Left controls
         left = self._build_left_controls()
         root.addWidget(left, 0)
@@ -44,8 +46,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self._freqs = default_freq_grid(self._fs, n=2048, fmin=10.0)
         self._section_curves: List[pg.PlotDataItem] = []
 
-        # Seed one row
-        self._add_row(FilterType.PEAK, 1000.0, 0.70, 4.5, active=True)
+        self._init_fixed_rows()
         self.table.selectRow(0)
         self._sync_editors_from_row(0)
         self._update_plot()
@@ -91,23 +92,11 @@ class MainWindow(QtWidgets.QMainWindow):
         self.spin_gain.setDecimals(2)
         self.spin_gain.valueChanged.connect(self._apply_editors_to_selected)
 
-        btn_add = QtWidgets.QPushButton("Add Filter")
-        btn_dup = QtWidgets.QPushButton("Duplicate")
-        btn_del = QtWidgets.QPushButton("Remove Selected")
-        btn_add.clicked.connect(lambda: self._add_row(
-            self.cb_type.currentData(), float(self.spin_f0.value()),
-            float(self.spin_q.value()), float(self.spin_gain.value()), active=True))
-        btn_dup.clicked.connect(self._duplicate_selected)
-        btn_del.clicked.connect(self._remove_selected)
-
         form.addRow("Filter type", self.cb_type)
         form.addRow("Sample rate", self.spin_fs)
         form.addRow("f₀ / f_c", self.spin_f0)
         form.addRow("Q", self.spin_q)
         form.addRow("Gain", self.spin_gain)
-        form.addRow(btn_add)
-        form.addRow(btn_dup)
-        form.addRow(btn_del)
         form.addRow(QtWidgets.QLabel(" "))
         form.addRow(self._build_readout_group())
         return w
@@ -144,7 +133,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def _build_table_box(self) -> QtWidgets.QGroupBox:
         gb = QtWidgets.QGroupBox("Filters")
         v = QtWidgets.QVBoxLayout(gb)
-        self.table = QtWidgets.QTableWidget(0, 6)
+        self.table = QtWidgets.QTableWidget(self._num_sections, 6)
         self.table.setHorizontalHeaderLabels(
             ["Active", "Type", "f₀ / Hz", "Q", "Gain / dB", "Color"])
         self.table.verticalHeader().setVisible(False)
@@ -157,10 +146,17 @@ class MainWindow(QtWidgets.QMainWindow):
         v.addWidget(self.table)
         return gb
 
-    def _add_row(self, typ: FilterType, f0: float, q: float, gain: float, active: bool = True):
-        row = self.table.rowCount()
-        self.table.insertRow(row)
+    def _init_fixed_rows(self):
+        defaults = [
+            (FilterType.PEAK, 1000.0, 0.70, 4.5, True)
+        ]
+        while len(defaults) < self._num_sections:
+            defaults.append((FilterType.PEAK, 1000.0, 0.70, 0.0, False))
+        for row, (typ, f0, q, gain, active) in enumerate(defaults):
+            self._setup_row(row, typ, f0, q, gain, active)
 
+    def _setup_row(self, row: int, typ: FilterType, f0: float, q: float,
+                   gain: float, active: bool):
         chk = QtWidgets.QCheckBox()
         chk.setChecked(active)
         chk.stateChanged.connect(self._update_plot)
@@ -180,7 +176,7 @@ class MainWindow(QtWidgets.QMainWindow):
             spin.valueChanged.connect(self._update_plot)
             self.table.setCellWidget(row, col, spin)
 
-        color = pg.intColor(row, hues=12, values=1, maxValue=255)
+        color = self._row_color(row)
         swatch = QtWidgets.QLabel("   ")
         swatch.setAutoFillBackground(True)
         pal = swatch.palette()
@@ -190,21 +186,6 @@ class MainWindow(QtWidgets.QMainWindow):
         swatch.setPalette(pal)
         swatch.setFrameShape(QtWidgets.QFrame.Box)
         self.table.setCellWidget(row, 5, swatch)
-
-        self._update_plot()
-
-    def _duplicate_selected(self):
-        r = self._selected_row()
-        if r is None: return
-        p = self._params_from_row(r)
-        self._add_row(p.typ, p.f0, p.q, p.gain_db, active=True)
-        self.table.selectRow(self.table.rowCount()-1)
-
-    def _remove_selected(self):
-        r = self._selected_row()
-        if r is None: return
-        self.table.removeRow(r)
-        self._update_plot()
 
     def _selected_row(self) -> int | None:
         sel = self.table.selectionModel().selectedRows()
