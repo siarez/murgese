@@ -81,9 +81,29 @@ class CrossoverTab(QtWidgets.QWidget):
         # Channel A group
         gb_a = QtWidgets.QGroupBox("Channel A")
         la = QtWidgets.QVBoxLayout(gb_a)
+        # Channel A polarity + delay row
+        row_a = QtWidgets.QWidget()
+        row_a_h = QtWidgets.QHBoxLayout(row_a)
+        row_a_h.setContentsMargins(0, 0, 0, 0)
+        row_a_h.setSpacing(8)
         self.chk_xo_pol_A = QtWidgets.QCheckBox("Invert polarity")
         self.chk_xo_pol_A.toggled.connect(self._update_xo_plots)
-        la.addWidget(self.chk_xo_pol_A)
+        row_a_h.addWidget(self.chk_xo_pol_A)
+        # Delay control: 0..16 samples
+        lbl_a = QtWidgets.QLabel("Delay:")
+        row_a_h.addWidget(lbl_a)
+        self.spin_delay_A = QtWidgets.QSpinBox()
+        self.spin_delay_A.setRange(0, 16)
+        self.spin_delay_A.setValue(0)
+        self.spin_delay_A.setSuffix(" samples")
+        self.spin_delay_A.setToolTip("TAS3251 per-channel delay (0–16 samples)")
+        self.spin_delay_A.valueChanged.connect(self._on_delay_changed)
+        row_a_h.addWidget(self.spin_delay_A)
+        self.lbl_delay_A = QtWidgets.QLabel("≈ 0.0 cm (0.0 in)")
+        self.lbl_delay_A.setToolTip("Approximate distance sound travels for this delay at 343 m/s")
+        row_a_h.addWidget(self.lbl_delay_A)
+        row_a_h.addStretch(1)
+        la.addWidget(row_a)
         self.table_xo_A = QtWidgets.QTableWidget(self._xo_num_sections, 6)
         self.table_xo_A.setHorizontalHeaderLabels(
             ["#", "Mode", "Topology", "Ripple / dB", "Cut-off / Hz", "Color"])
@@ -100,9 +120,28 @@ class CrossoverTab(QtWidgets.QWidget):
         # Channel B group
         gb_b = QtWidgets.QGroupBox("Channel B")
         lb = QtWidgets.QVBoxLayout(gb_b)
+        # Channel B polarity + delay row
+        row_b = QtWidgets.QWidget()
+        row_b_h = QtWidgets.QHBoxLayout(row_b)
+        row_b_h.setContentsMargins(0, 0, 0, 0)
+        row_b_h.setSpacing(8)
         self.chk_xo_pol_B = QtWidgets.QCheckBox("Invert polarity")
         self.chk_xo_pol_B.toggled.connect(self._update_xo_plots)
-        lb.addWidget(self.chk_xo_pol_B)
+        row_b_h.addWidget(self.chk_xo_pol_B)
+        lbl_b = QtWidgets.QLabel("Delay:")
+        row_b_h.addWidget(lbl_b)
+        self.spin_delay_B = QtWidgets.QSpinBox()
+        self.spin_delay_B.setRange(0, 16)
+        self.spin_delay_B.setValue(0)
+        self.spin_delay_B.setSuffix(" samples")
+        self.spin_delay_B.setToolTip("TAS3251 per-channel delay (0–16 samples)")
+        self.spin_delay_B.valueChanged.connect(self._on_delay_changed)
+        row_b_h.addWidget(self.spin_delay_B)
+        self.lbl_delay_B = QtWidgets.QLabel("≈ 0.0 cm (0.0 in)")
+        self.lbl_delay_B.setToolTip("Approximate distance sound travels for this delay at 343 m/s")
+        row_b_h.addWidget(self.lbl_delay_B)
+        row_b_h.addStretch(1)
+        lb.addWidget(row_b)
         self.table_xo_B = QtWidgets.QTableWidget(self._xo_num_sections, 6)
         self.table_xo_B.setHorizontalHeaderLabels(
             ["#", "Mode", "Topology", "Ripple / dB", "Cut-off / Hz", "Color"])
@@ -129,12 +168,34 @@ class CrossoverTab(QtWidgets.QWidget):
         self._init_xo_rows(self.table_xo_A, channel='A')
         self._init_xo_rows(self.table_xo_B, channel='B')
         self._update_xo_plots()
+        self._update_delay_labels()
 
     def set_fs(self, fs: float):
         if abs(fs - getattr(self, '_fs', 48000.0)) > 1e-9:
             self._fs = float(fs)
             self._freqs = default_freq_grid(self._fs, n=2048, fmin=10.0)
             self._update_xo_plots()
+            self._update_delay_labels()
+
+    def _on_delay_changed(self, *_):
+        # Update labels and plots (phase of electrical sum changes)
+        self._update_delay_labels()
+        self._update_xo_plots()
+
+    def _update_delay_labels(self):
+        # Compute and show distance equivalents for current delays
+        def fmt(samples: int) -> str:
+            if self._fs <= 0:
+                return "≈ n/a"
+            t = float(samples) / float(self._fs)
+            dist_m = 343.0 * t
+            cm = dist_m * 100.0
+            inch = dist_m * 39.37007874
+            return f"≈ {cm:.1f} cm ({inch:.1f} in)"
+        if hasattr(self, 'spin_delay_A'):
+            self.lbl_delay_A.setText(fmt(int(self.spin_delay_A.value())))
+        if hasattr(self, 'spin_delay_B'):
+            self.lbl_delay_B.setText(fmt(int(self.spin_delay_B.value())))
 
     def _init_xo_rows(self, table: QtWidgets.QTableWidget, channel: str):
         for row in range(self._xo_num_sections):
@@ -301,6 +362,15 @@ class CrossoverTab(QtWidgets.QWidget):
 
         H_A = cascade_response_complex(sections_A, self._freqs, self._fs) if sections_A else np.ones_like(self._freqs, dtype=complex)
         H_B = cascade_response_complex(sections_B, self._freqs, self._fs) if sections_B else np.ones_like(self._freqs, dtype=complex)
+        # Apply per-channel sample delays (phase-only, magnitude unchanged)
+        nA = int(getattr(self, 'spin_delay_A', None).value() if hasattr(self, 'spin_delay_A') else 0)
+        nB = int(getattr(self, 'spin_delay_B', None).value() if hasattr(self, 'spin_delay_B') else 0)
+        if (nA | nB) != 0:
+            w = 2.0 * np.pi * self._freqs / self._fs
+            if nA:
+                H_A = H_A * np.exp(-1j * w * nA)
+            if nB:
+                H_B = H_B * np.exp(-1j * w * nB)
         H_sum = H_A + H_B
         acc_db_sum = 20.0 * np.log10(np.maximum(np.abs(H_sum), 1e-12))
         self.curve_xo_sum.setData(self._freqs, acc_db_sum)

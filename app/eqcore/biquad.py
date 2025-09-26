@@ -1,9 +1,31 @@
+"""
+EQ core: biquad design and evaluation utilities.
+
+This module provides:
+  - FilterType: high-level filter intent (RBJ “cookbook” family + first-order LPF/HPF)
+  - BiquadParams: input parameters to design a single section (a0 normalized to 1)
+  - SOS: second-order section coefficients (b0,b1,b2,a1,a2) with a0=1
+  - Design helpers for first-order LPF/HPF and RBJ-based biquads
+  - Fast vectorized frequency-response evaluators (magnitude dB and complex)
+
+Notes
+  - All designs normalize the direct-form IIR such that a0 == 1; callers writing
+    to hardware with different normalization should scale accordingly.
+  - For RBJ designs, see “Cookbook formulae for audio EQ biquad filter coefficients”
+    by Robert Bristow‑Johnson. The formulas used here mirror that reference.
+  - Numerics: functions are vectorized with NumPy and avoid log of zero by
+    clamping magnitudes to small epsilons.
+"""
 from __future__ import annotations
 import enum
 import numpy as np
 from dataclasses import dataclass
 
 class FilterType(str, enum.Enum):
+    """Supported biquad topologies at the intent level.
+
+    Values are stringy for friendlier display; logic should compare by identity.
+    """
     PEAK = "Peak (Peaking EQ)"
     LSHELF = "Low Shelf"
     HSHELF = "High Shelf"
@@ -15,6 +37,15 @@ class FilterType(str, enum.Enum):
 
 @dataclass
 class BiquadParams:
+    """User-level parameters to design a single biquad section.
+
+    Attributes
+    - typ: FilterType (intent)
+    - fs: Sample rate in Hz
+    - f0: Corner / center frequency in Hz
+    - q:  Quality factor (bandwidth shaping)
+    - gain_db: Gain in dB (used by peak/shelves; ignored for pure LPF/HPF/BPF/NOTCH)
+    """
     typ: FilterType
     fs: float       # sample rate (Hz)
     f0: float       # center / cutoff (Hz)
@@ -23,16 +54,27 @@ class BiquadParams:
 
 @dataclass
 class SOS:
+    """Second-order section coefficients with a0 normalized to 1.
+
+    The transfer function is:
+        H(z) = (b0 + b1 z^{-1} + b2 z^{-2}) / (1 + a1 z^{-1} + a2 z^{-2}).
+    """
     # normalized so a0 = 1
     b0: float; b1: float; b2: float
     a1: float; a2: float
 
 def _first_order_common_k(fs: float, f0: float) -> float:
-    # Bilinear transform prewarped factor
-    # k = 1 / tan(pi*f0/fs)
+    """Bilinear-transform prewarped factor for 1st-order prototypes.
+
+    k = 1 / tan(pi * f0 / fs)
+    """
     return 1.0 / np.tan(np.pi * f0 / fs)
 
 def design_first_order_lpf(fs: float, f0: float) -> SOS:
+    """Design a 1st-order low-pass (RBJ-equivalent) with a0==1.
+
+    Uses bilinear transform on analog prototype H(s)=1/(s+1) scaled by prewarp.
+    """
     k = _first_order_common_k(fs, f0)
     den = (k + 1.0)
     b0 = 1.0 / den
@@ -43,6 +85,7 @@ def design_first_order_lpf(fs: float, f0: float) -> SOS:
     return SOS(b0, b1, b2, a1, a2)
 
 def design_first_order_hpf(fs: float, f0: float) -> SOS:
+    """Design a 1st-order high-pass with a0==1 via bilinear transform."""
     k = _first_order_common_k(fs, f0)
     den = (k + 1.0)
     b0 = k / den
@@ -53,6 +96,7 @@ def design_first_order_hpf(fs: float, f0: float) -> SOS:
     return SOS(b0, b1, b2, a1, a2)
 
 def _rbj_peak(p: BiquadParams) -> SOS:
+    """RBJ peaking EQ design (gain_db used; a0 normalized to 1)."""
     A = 10.0 ** (p.gain_db / 40.0)
     w0 = 2*np.pi*p.f0/p.fs
     alpha = np.sin(w0)/(2*p.q)
@@ -68,6 +112,7 @@ def _rbj_peak(p: BiquadParams) -> SOS:
     return SOS(b0*inv, b1*inv, b2*inv, a1*inv, a2*inv)
 
 def _rbj_lowshelf(p: BiquadParams) -> SOS:
+    """RBJ low-shelf design (gain_db, Q as slope control)."""
     A = 10.0 ** (p.gain_db / 40.0)
     w0 = 2*np.pi*p.f0/p.fs
     alpha = np.sin(w0)/(2*p.q)
@@ -84,6 +129,7 @@ def _rbj_lowshelf(p: BiquadParams) -> SOS:
     return SOS(b0*inv, b1*inv, b2*inv, a1*inv, a2*inv)
 
 def _rbj_highshelf(p: BiquadParams) -> SOS:
+    """RBJ high-shelf design (gain_db, Q as slope control)."""
     A = 10.0 ** (p.gain_db / 40.0)
     w0 = 2*np.pi*p.f0/p.fs
     alpha = np.sin(w0)/(2*p.q)
@@ -100,6 +146,7 @@ def _rbj_highshelf(p: BiquadParams) -> SOS:
     return SOS(b0*inv, b1*inv, b2*inv, a1*inv, a2*inv)
 
 def _rbj_lpf(p: BiquadParams) -> SOS:
+    """RBJ 2nd-order low-pass design (Q defines damping)."""
     w0 = 2*np.pi*p.f0/p.fs
     alpha = np.sin(w0)/(2*p.q)
     cosw = np.cos(w0)
@@ -113,6 +160,7 @@ def _rbj_lpf(p: BiquadParams) -> SOS:
     return SOS(b0*inv, b1*inv, b2*inv, a1*inv, a2*inv)
 
 def _rbj_hpf(p: BiquadParams) -> SOS:
+    """RBJ 2nd-order high-pass design (Q defines damping)."""
     w0 = 2*np.pi*p.f0/p.fs
     alpha = np.sin(w0)/(2*p.q)
     cosw = np.cos(w0)
@@ -126,6 +174,11 @@ def _rbj_hpf(p: BiquadParams) -> SOS:
     return SOS(b0*inv, b1*inv, b2*inv, a1*inv, a2*inv)
 
 def _rbj_bpf_const_peak(p: BiquadParams) -> SOS:
+    """RBJ band-pass (constant peak gain) design.
+
+    This is the “constant 0 dB peak gain” variant (b1=0), often preferable for
+    visualizing band emphasis without gain at DC/nyquist.
+    """
     w0 = 2*np.pi*p.f0/p.fs
     alpha = np.sin(w0)/(2*p.q)
     cosw = np.cos(w0)
@@ -140,6 +193,7 @@ def _rbj_bpf_const_peak(p: BiquadParams) -> SOS:
     return SOS(b0*inv, b1*inv, b2*inv, a1*inv, a2*inv)
 
 def _rbj_notch(p: BiquadParams) -> SOS:
+    """RBJ notch design (zeros on unit circle at ±e^{jw0})."""
     w0 = 2*np.pi*p.f0/p.fs
     alpha = np.sin(w0)/(2*p.q)
     cosw = np.cos(w0)
@@ -153,6 +207,11 @@ def _rbj_notch(p: BiquadParams) -> SOS:
     return SOS(b0*inv, b1*inv, b2*inv, a1*inv, a2*inv)
 
 def design_biquad(p: BiquadParams) -> SOS:
+    """Dispatch to the appropriate biquad design based on FilterType.
+
+    Returns an SOS with a0 normalized to 1. ALLPASS returns a unity pass-through.
+    Raises ValueError for unsupported types.
+    """
     if p.typ == FilterType.ALLPASS:
         return SOS(1.0, 0.0, 0.0, 0.0, 0.0)
     if p.typ == FilterType.PEAK:
@@ -172,12 +231,22 @@ def design_biquad(p: BiquadParams) -> SOS:
     raise ValueError("Unsupported filter type")
 
 def default_freq_grid(fs: float, n: int = 1024, fmin: float = 10.0) -> np.ndarray:
-    # log-spaced up to Nyquist
+    """Log-spaced frequency grid from fmin to Nyquist inclusive.
+
+    Parameters
+    - fs: sample rate (Hz)
+    - n: number of points
+    - fmin: lowest frequency (Hz), clamped to >= 1e-3
+    """
     fmax = fs / 2.0
     return np.geomspace(max(fmin, 1e-3), fmax, n)
 
 def sos_response_db(sos: SOS, f: np.ndarray, fs: float) -> np.ndarray:
-    # Evaluate H(e^{jw}) for one section; vectorized
+    """Evaluate magnitude in dB for a single SOS over frequencies f.
+
+    Vectorized direct evaluation of H(e^{jw}) using trigonometric identities to
+    avoid explicit complex exponentials for speed.
+    """
     w = 2*np.pi*f/fs
     cw = np.cos(w); sw = np.sin(w)
     # Using cos(2w) = 2cos^2(w) - 1 and sin(2w) = 2sin(w)cos(w)
@@ -196,14 +265,18 @@ def sos_response_db(sos: SOS, f: np.ndarray, fs: float) -> np.ndarray:
     return 20*np.log10(np.maximum(mag, 1e-20))
 
 def cascade_response_db(sections: list[SOS], f: np.ndarray, fs: float) -> np.ndarray:
-    # Sum dB of each section's magnitude (since multiplying mags in linear)
+    """Evaluate cascade magnitude in dB by summing per-section dB magnitudes.
+
+    Equivalent to multiplying magnitudes in linear and taking 20*log10.
+    Phase interactions are ignored; use cascade_response_complex for full H.
+    """
     acc = np.zeros_like(f, dtype=float)
     for s in sections:
         acc += sos_response_db(s, f, fs)
     return acc
 
 def sos_response_complex(sos: SOS, f: np.ndarray, fs: float) -> np.ndarray:
-    # Complex frequency response H(e^{jw}) for one section
+    """Return complex H(e^{jw}) for a single SOS at frequencies f."""
     w = 2*np.pi*f/fs
     cw = np.cos(w); sw = np.sin(w)
     cos2w = 2*cw*cw - 1.0
@@ -220,6 +293,7 @@ def sos_response_complex(sos: SOS, f: np.ndarray, fs: float) -> np.ndarray:
     return re + 1j*im
 
 def cascade_response_complex(sections: list[SOS], f: np.ndarray, fs: float) -> np.ndarray:
+    """Complex cascade response by multiplying section responses in linear domain."""
     H = np.ones_like(f, dtype=complex)
     for s in sections:
         H *= sos_response_complex(s, f, fs)

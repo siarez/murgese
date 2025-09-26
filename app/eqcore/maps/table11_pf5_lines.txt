@@ -1,0 +1,528 @@
+p70 y=  58 x=  54.0 | DSPMemoryMapforProcessFlow5
+p70 y=  59 x= 512.9 | www.ti.com
+p70 y=  75 x=  54.0 | A.5 DSP Memory Map for Process Flow 5
+p70 y=  93 x=  84.0 | Table11liststheDSPmemorymapfor processflow5.
+p70 y= 115 x= 175.3 | Table11.DSPMemoryMapforProcessFlow5 —Book0x8C
+p70 y= 133 x=  98.7 | Sub Page RegisterName Numberof DefaultValue Description
+p70 y= 141 x=  91.3 | Address Bytes/Format
+p70 y= 153 x= 289.3 | CROSSOVERBQs
+p70 y= 165 x=  97.7 | 0x58 0x11 BQ1B0 4/1.31 0x7FFFFFFF CrossOverBQcoefficient
+p70 y= 178 x=  97.1 | 0x5C 0x11 BQ1B1 4/2.30 0x00000000 CrossOverBQcoefficient
+p70 y= 190 x=  97.7 | 0x60 0x11 BQ1B2 4/1.31 0x00000000 CrossOverBQcoefficient
+p70 y= 202 x=  97.7 | 0x64 0x11 BQ1A1 4/2.30 0x00000000 CrossOverBQcoefficient
+p70 y= 214 x=  97.7 | 0x68 0x11 BQ1A2 4/1.31 0x00000000 CrossOverBQcoefficient
+p70 y= 226 x=  97.1 | 0x6C 0x11 BQ2B0 4/1.31 0x7FFFFFFF CrossOverBQcoefficient
+p70 y= 239 x=  97.7 | 0x70 0x11 BQ2B1 4/2.30 0x00000000 CrossOverBQcoefficient
+p70 y= 251 x=  97.7 | 0x74 0x11 BQ2B2 4/1.31 0x00000000 CrossOverBQcoefficient
+p70 y= 263 x=  97.7 | 0x78 0x11 BQ2A1 4/2.30 0x00000000 CrossOverBQcoefficient
+p70 y= 275 x=  97.1 | 0x7C 0x11 BQ2A2 4/1.31 0x00000000 CrossOverBQcoefficient
+p70 y= 287 x=  97.7 | 0x08 0x12 BQ3B0 4/1.31 0x7FFFFFFF CrossOverBQcoefficient
+p70 y= 300 x=  97.1 | 0x0C 0x12 BQ3B1 4/2.30 0x00000000 CrossOverBQcoefficient
+p70 y= 312 x=  97.7 | 0x10 0x12 BQ3B2 4/1.31 0x00000000 CrossOverBQcoefficient
+p70 y= 324 x=  97.7 | 0x14 0x12 BQ3A1 4/2.30 0x00000000 CrossOverBQcoefficient
+p70 y= 336 x=  97.7 | 0x18 0x12 BQ3A2 4/1.31 0x00000000 CrossOverBQcoefficient
+p70 y= 348 x=  97.1 | 0x1C 0x12 BQ4B0 4/1.31 0x7FFFFFFF CrossOverBQcoefficient
+p70 y= 361 x=  97.7 | 0x20 0x12 BQ4B1 4/2.30 0x00000000 CrossOverBQcoefficient
+p70 y= 373 x=  97.7 | 0x24 0x12 BQ4B2 4/1.31 0x00000000 CrossOverBQcoefficient
+p70 y= 385 x=  97.7 | 0x28 0x12 BQ4A1 4/2.30 0x00000000 CrossOverBQcoefficient
+p70 y= 397 x=  97.1 | 0x2C 0x12 BQ4A2 4/1.31 0x00000000 CrossOverBQcoefficient
+p70 y= 409 x=  97.7 | 0x30 0x12 BQ5B0 4/1.31 0x7FFFFFFF CrossOverBQcoefficient
+p70 y= 422 x=  97.7 | 0x34 0x12 BQ5B1 4/2.30 0x00000000 CrossOverBQcoefficient
+p70 y= 434 x=  97.7 | 0x38 0x12 BQ5B2 4/1.31 0x00000000 CrossOverBQcoefficient
+p70 y= 446 x=  97.1 | 0x3C 0x12 BQ5A1 4/2.30 0x00000000 CrossOverBQcoefficient
+p70 y= 458 x=  97.7 | 0x40 0x12 BQ5A2 4/1.31 0x00000000 CrossOverBQcoefficient
+p70 y= 470 x= 280.9 | SUBCROSSOVERBQs
+p70 y= 483 x=  97.7 | 0x44 0x12 CH-SubBQ1B0 4/1.31 0x7FFFFFFF SubCrossOverBQcoefficient
+p70 y= 495 x=  97.7 | 0x48 0x12 CH-SubBQ1B1 4/2.30 0x00000000 SubCrossOverBQcoefficient
+p70 y= 507 x=  97.1 | 0x4C 0x12 CH-SubBQ1B2 4/1.31 0x00000000 SubCrossOverBQcoefficient
+p70 y= 519 x=  97.7 | 0x50 0x12 CH-SubBQ1A1 4/2.30 0x00000000 SubCrossOverBQcoefficient
+p70 y= 531 x=  97.7 | 0x54 0x12 CH-SubBQ1A2 4/1.31 0x00000000 SubCrossOverBQcoefficient
+p70 y= 544 x=  97.7 | 0x58 0x12 CH-SubBQ2B0 4/1.31 0x7FFFFFFF SubCrossOverBQcoefficient
+p70 y= 556 x=  97.1 | 0x5C 0x12 CH-SubBQ2B1 4/2.30 0x00000000 SubCrossOverBQcoefficient
+p70 y= 568 x=  97.7 | 0x60 0x12 CH-SubBQ2B2 4/1.31 0x00000000 SubCrossOverBQcoefficient
+p70 y= 580 x=  97.7 | 0x64 0x12 CH-SubBQ2A1 4/2.30 0x00000000 SubCrossOverBQcoefficient
+p70 y= 592 x=  97.7 | 0x68 0x12 CH-SubBQ2A2 4/1.31 0x00000000 SubCrossOverBQcoefficient
+p70 y= 605 x=  97.1 | 0x6C 0x12 CH-SubBQ3B0 4/1.31 0x7FFFFFFF SubCrossOverBQcoefficient
+p70 y= 617 x=  97.7 | 0x70 0x12 CH-SubBQ3B1 4/2.30 0x00000000 SubCrossOverBQcoefficient
+p70 y= 629 x=  97.7 | 0x74 0x12 CH-SubBQ3B2 4/1.31 0x00000000 SubCrossOverBQcoefficient
+p70 y= 641 x=  97.7 | 0x78 0x12 CH-SubBQ3A1 4/2.30 0x00000000 SubCrossOverBQcoefficient
+p70 y= 653 x=  97.1 | 0x7C 0x12 CH-SubBQ3A2 4/1.31 0x00000000 SubCrossOverBQcoefficient
+p70 y= 666 x=  97.7 | 0x08 0x13 CH-SubBQ4B0 4/1.31 0x7FFFFFFF SubCrossOverBQcoefficient
+p70 y= 678 x=  97.1 | 0x0C 0x13 CH-SubBQ4B1 4/2.30 0x00000000 SubCrossOverBQcoefficient
+p70 y= 690 x=  97.7 | 0x10 0x13 CH-SubBQ4B2 4/1.31 0x00000000 SubCrossOverBQcoefficient
+p70 y= 702 x=  97.7 | 0x14 0x13 CH-SubBQ4A1 4/2.30 0x00000000 SubCrossOverBQcoefficient
+p70 y= 714 x=  97.7 | 0x18 0x13 CH-SubBQ4A2 4/1.31 0x00000000 SubCrossOverBQcoefficient
+p70 y= 727 x=  97.1 | 0x1C 0x13 CH-SubBQ5B0 4/1.31 0x7FFFFFFF SubCrossOverBQcoefficient
+p70 y= 750 x=  54.0 | 70
+p70 y= 751 x=  72.0 | TAS3251processflows SLAA799A–November2018–RevisedJanuary2019
+p70 y= 760 x= 439.3 | SubmitDocumentationFeedback
+p70 y= 772 x= 217.2 | Copyright©2018–2019,TexasInstrumentsIncorporated
+p71 y=  58 x= 406.2 | DSPMemoryMapforProcessFlow5
+p71 y=  59 x=  54.0 | www.ti.com
+p71 y=  82 x= 146.5 | Table11.DSPMemoryMapforProcessFlow5 —Book0x8C(continued)
+p71 y=  99 x=  98.7 | Sub Page RegisterName Numberof DefaultValue Description
+p71 y= 107 x=  91.3 | Address Bytes/Format
+p71 y= 120 x=  97.7 | 0x20 0x13 CH-SubBQ5B1 4/2.30 0x00000000 SubCrossOverBQcoefficient
+p71 y= 132 x=  97.7 | 0x24 0x13 CH-SubBQ5B2 4/1.31 0x00000000 SubCrossOverBQcoefficient
+p71 y= 144 x=  97.7 | 0x28 0x13 CH-SubBQ5A1 4/2.30 0x00000000 SubCrossOverBQcoefficient
+p71 y= 156 x=  97.1 | 0x2C 0x13 CH-SubBQ5A2 4/1.31 0x00000000 SubCrossOverBQcoefficient
+p71 y= 168 x= 304.1 | DRC1BQ
+p71 y= 181 x=  97.7 | 0x30 0x13 BQB0 4/1.31 0x7FFFFFFF DRC1BQcoefficient
+p71 y= 193 x=  97.7 | 0x34 0x13 BQB1 4/2.30 0x00000000 DRC1BQcoefficient
+p71 y= 205 x=  97.7 | 0x38 0x13 BQB2 4/1.31 0x00000000 DRC1BQcoefficient
+p71 y= 217 x=  97.1 | 0x3C 0x13 BQA1 4/2.30 0x00000000 DRC1BQcoefficient
+p71 y= 229 x=  97.7 | 0x40 0x13 BQA2 4/1.31 0x00000000 DRC1BQcoefficient
+p71 y= 242 x=  97.7 | 0x44 0x13 CH-SubBQB0 4/1.31 0x7FFFFFFF SubDRC1BQcoefficient
+p71 y= 254 x=  97.7 | 0x48 0x13 CH-SubBQB1 4/2.30 0x00000000 SubDRC1BQcoefficient
+p71 y= 266 x=  97.1 | 0x4C 0x13 CH-SubBQB2 4/1.31 0x00000000 SubDRC1BQcoefficient
+p71 y= 278 x=  97.7 | 0x50 0x13 CH-SubBQA1 4/2.30 0x00000000 SubDRC1BQcoefficient
+p71 y= 290 x=  97.7 | 0x54 0x13 CH-SubBQA2 4/1.31 0x00000000 SubDRC1BQcoefficient
+p71 y= 303 x= 304.1 | DRC3BQ
+p71 y= 315 x=  97.7 | 0x58 0x13 BQB0 4/1.31 0x7FFFFFFF DRC3BQcoefficient
+p71 y= 327 x=  97.1 | 0x5C 0x13 BQB1 4/2.30 0x00000000 DRC3BQcoefficient
+p71 y= 339 x=  97.7 | 0x60 0x13 BQB2 4/1.31 0x00000000 DRC3BQcoefficient
+p71 y= 351 x=  97.7 | 0x64 0x13 BQA1 4/2.30 0x00000000 DRC3BQcoefficient
+p71 y= 364 x=  97.7 | 0x68 0x13 BQA2 4/1.31 0x00000000 DRC3BQcoefficient
+p71 y= 376 x=  97.1 | 0x6C 0x13 CH-SubBQB0 4/1.31 0x7FFFFFFF SubDRC3BQcoefficient
+p71 y= 388 x=  97.7 | 0x70 0x13 CH-SubBQB1 4/2.30 0x00000000 SubDRC3BQcoefficient
+p71 y= 400 x=  97.7 | 0x74 0x13 CH-SubBQB2 4/1.31 0x00000000 SubDRC3BQcoefficient
+p71 y= 412 x=  97.7 | 0x78 0x13 CH-SubBQA1 4/2.30 0x00000000 SubDRC3BQcoefficient
+p71 y= 425 x=  97.1 | 0x7C 0x13 CH-SubBQA2 4/1.31 0x00000000 SubDRC3BQcoefficient
+p71 y= 437 x= 304.1 | DRC2BQ
+p71 y= 449 x=  97.7 | 0x08 0x14 BQ1B0 4/1.31 0x7FFFFFFF DRC2BQcoefficient
+p71 y= 461 x=  97.1 | 0x0C 0x14 BQ1B1 4/2.30 0x00000000 DRC2BQcoefficient
+p71 y= 473 x=  97.7 | 0x10 0x14 BQ1B2 4/1.31 0x00000000 DRC2BQcoefficient
+p71 y= 486 x=  97.7 | 0x14 0x14 BQ1A1 4/2.30 0x00000000 DRC2BQcoefficient
+p71 y= 498 x=  97.7 | 0x18 0x14 BQ1A2 4/1.31 0x00000000 DRC2BQcoefficient
+p71 y= 510 x=  97.1 | 0x1C 0x14 BQ2B0 4/1.31 0x7FFFFFFF DRC2BQcoefficient
+p71 y= 522 x=  97.7 | 0x20 0x14 BQ2B1 4/2.30 0x00000000 DRC2BQcoefficient
+p71 y= 534 x=  97.7 | 0x24 0x14 BQ2B2 4/1.31 0x00000000 DRC2BQcoefficient
+p71 y= 547 x=  97.7 | 0x28 0x14 BQ2A1 4/2.30 0x00000000 DRC2BQcoefficient
+p71 y= 559 x=  97.1 | 0x2C 0x14 BQ2A2 4/1.31 0x00000000 DRC2BQcoefficient
+p71 y= 571 x=  97.7 | 0x30 0x14 CH-SubBQ1B0 4/1.31 0x7FFFFFFF SubDRC2BQcoefficient
+p71 y= 583 x=  97.7 | 0x34 0x14 CH-SubBQ1B1 4/2.30 0x00000000 SubDRC2BQcoefficient
+p71 y= 595 x=  97.7 | 0x38 0x14 CH-SubBQ1B2 4/1.31 0x00000000 SubDRC2BQcoefficient
+p71 y= 608 x=  97.1 | 0x3C 0x14 CH-SubBQ1A1 4/2.30 0x00000000 SubDRC2BQcoefficient
+p71 y= 620 x=  97.7 | 0x40 0x14 CH-SubBQ1A2 4/1.31 0x00000000 SubDRC2BQcoefficient
+p71 y= 632 x=  97.7 | 0x44 0x14 CH-SubBQ2B0 4/1.31 0x7FFFFFFF SubDRC2BQcoefficient
+p71 y= 644 x=  97.7 | 0x48 0x14 CH-SubBQ2B1 4/2.30 0x00000000 SubDRC2BQcoefficient
+p71 y= 656 x=  97.1 | 0x4C 0x14 CH-SubBQ2B2 4/1.31 0x00000000 SubDRC2BQcoefficient
+p71 y= 669 x=  97.7 | 0x50 0x14 CH-SubBQ2A1 4/2.30 0x00000000 SubDRC2BQcoefficient
+p71 y= 681 x=  97.7 | 0x54 0x14 CH-SubBQ2A2 4/1.31 0x00000000 SubDRC2BQcoefficient
+p71 y= 693 x= 291.8 | DPEQSENSEBQ
+p71 y= 705 x=  97.7 | 0x58 0x14 BQ1B0 4/1.31 0x7FFFFFFF DPEQsenseBQcoefficient
+p71 y= 717 x=  97.1 | 0x5C 0x14 BQ1B1 4/2.30 0x00000000 DPEQsenseBQcoefficient
+p71 y= 730 x=  97.7 | 0x60 0x14 BQ1B2 4/1.31 0x00000000 DPEQsenseBQcoefficient
+p71 y= 750 x= 549.1 | 71
+p71 y= 751 x=  54.0 | SLAA799A–November2018–RevisedJanuary2019 TAS3251processflows
+p71 y= 760 x=  54.0 | SubmitDocumentationFeedback
+p71 y= 772 x= 217.2 | Copyright©2018–2019,TexasInstrumentsIncorporated
+p72 y=  58 x=  54.0 | DSPMemoryMapforProcessFlow5
+p72 y=  59 x= 512.9 | www.ti.com
+p72 y=  82 x= 146.5 | Table11.DSPMemoryMapforProcessFlow5 —Book0x8C(continued)
+p72 y=  99 x=  98.7 | Sub Page RegisterName Numberof DefaultValue Description
+p72 y= 107 x=  91.3 | Address Bytes/Format
+p72 y= 120 x=  97.7 | 0x64 0x14 BQ1A1 4/2.30 0x00000000 DPEQsenseBQcoefficient
+p72 y= 132 x=  97.7 | 0x68 0x14 BQ1A2 4/1.31 0x00000000 DPEQsenseBQcoefficient
+p72 y= 144 x=  97.1 | 0x6C 0x14 BQ2B0 4/1.31 0x7FFFFFFF DPEQsenseBQcoefficient
+p72 y= 156 x=  97.7 | 0x70 0x14 BQ2B1 4/2.30 0x00000000 DPEQsenseBQcoefficient
+p72 y= 168 x=  97.7 | 0x74 0x14 BQ2B2 4/1.31 0x00000000 DPEQsenseBQcoefficient
+p72 y= 181 x=  97.7 | 0x78 0x14 BQ2A1 4/2.30 0x00000000 DPEQsenseBQcoefficient
+p72 y= 193 x=  97.1 | 0x7C 0x14 BQ2A2 4/1.31 0x00000000 DPEQsenseBQcoefficient
+p72 y= 205 x= 272.6 | DPEQLOWLEVELPATHBQ
+p72 y= 217 x=  97.7 | 0x08 0x15 BQ1B0 4/1.31 0x7FFFFFFF DPEQlowBQcoefficient
+p72 y= 229 x=  97.1 | 0x0C 0x15 BQ1B1 4/2.30 0x00000000 DPEQlowBQcoefficient
+p72 y= 242 x=  97.7 | 0x10 0x15 BQ1B2 4/1.31 0x00000000 DPEQlowBQcoefficient
+p72 y= 254 x=  97.7 | 0x14 0x15 BQ1A1 4/2.30 0x00000000 DPEQlowBQcoefficient
+p72 y= 266 x=  97.7 | 0x18 0x15 BQ1A2 4/1.31 0x00000000 DPEQlowBQcoefficient
+p72 y= 278 x=  97.1 | 0x1C 0x15 BQ2B0 4/1.31 0x7FFFFFFF DPEQlowBQcoefficient
+p72 y= 290 x=  97.7 | 0x20 0x15 BQ2B1 4/2.30 0x00000000 DPEQlowBQcoefficient
+p72 y= 303 x=  97.7 | 0x24 0x15 BQ2B2 4/1.31 0x00000000 DPEQlowBQcoefficient
+p72 y= 315 x=  97.7 | 0x28 0x15 BQ2A1 4/2.30 0x00000000 DPEQlowBQcoefficient
+p72 y= 327 x=  97.1 | 0x2C 0x15 BQ2A2 4/1.31 0x00000000 DPEQlowBQcoefficient
+p72 y= 339 x= 272.0 | DPEQHIGHLEVELPATHBQ
+p72 y= 351 x=  97.7 | 0x30 0x15 BQ1B0 4/1.31 0x7FFFFFFF DPEQhighBQcoefficient
+p72 y= 364 x=  97.7 | 0x34 0x15 BQ1B1 4/2.30 0x00000000 DPEQhighBQcoefficient
+p72 y= 376 x=  97.7 | 0x38 0x15 BQ1B2 4/1.31 0x00000000 DPEQhighBQcoefficient
+p72 y= 388 x=  97.1 | 0x3C 0x15 BQ1A1 4/2.30 0x00000000 DPEQhighBQcoefficient
+p72 y= 400 x=  97.7 | 0x40 0x15 BQ1A2 4/1.31 0x00000000 DPEQhighBQcoefficient
+p72 y= 412 x=  97.7 | 0x44 0x15 BQ2B0 4/1.31 0x7FFFFFFF DPEQhighBQcoefficient
+p72 y= 425 x=  97.7 | 0x48 0x15 BQ2B1 4/2.30 0x00000000 DPEQhighBQcoefficient
+p72 y= 437 x=  97.1 | 0x4C 0x15 BQ2B2 4/1.31 0x00000000 DPEQhighBQcoefficient
+p72 y= 449 x=  97.7 | 0x50 0x15 BQ2A1 4/2.30 0x00000000 DPEQhighBQcoefficient
+p72 y= 461 x=  97.7 | 0x54 0x15 BQ2A2 4/1.31 0x00000000 DPEQhighBQcoefficient
+p72 y= 473 x= 292.9 | EQLEFT14BQs
+p72 y= 486 x=  97.7 | 0x58 0x15 CH-LBQ1B0 4/1.31 0x7FFFFFFF LeftBQcoefficient
+p72 y= 498 x=  97.1 | 0x5C 0x15 CH-LBQ1B1 4/2.30 0x00000000 LeftBQcoefficient
+p72 y= 510 x=  97.7 | 0x60 0x15 CH-LBQ1B2 4/1.31 0x00000000 LeftBQcoefficient
+p72 y= 522 x=  97.7 | 0x64 0x15 CH-LBQ1A1 4/2.30 0x00000000 LeftBQcoefficient
+p72 y= 534 x=  97.7 | 0x68 0x15 CH-LBQ1A2 4/1.31 0x00000000 LeftBQcoefficient
+p72 y= 547 x=  97.1 | 0x6C 0x15 CH-LBQ2B0 4/1.31 0x7FFFFFFF LeftBQcoefficient
+p72 y= 559 x=  97.7 | 0x70 0x15 CH-LBQ2B1 4/2.30 0x00000000 LeftBQcoefficient
+p72 y= 571 x=  97.7 | 0x74 0x15 CH-LBQ2B2 4/1.31 0x00000000 LeftBQcoefficient
+p72 y= 583 x=  97.7 | 0x78 0x15 CH-LBQ2A1 4/2.30 0x00000000 LeftBQcoefficient
+p72 y= 595 x=  97.1 | 0x7C 0x15 CH-LBQ2A2 4/1.31 0x00000000 LeftBQcoefficient
+p72 y= 608 x=  97.7 | 0x08 0x16 CH-LBQ3B0 4/1.31 0x7FFFFFFF LeftBQcoefficient
+p72 y= 620 x=  97.1 | 0x0C 0x16 CH-LBQ3B1 4/2.30 0x00000000 LeftBQcoefficient
+p72 y= 632 x=  97.7 | 0x10 0x16 CH-LBQ3B2 4/1.31 0x00000000 LeftBQcoefficient
+p72 y= 644 x=  97.7 | 0x14 0x16 CH-LBQ3A1 4/2.30 0x00000000 LeftBQcoefficient
+p72 y= 656 x=  97.7 | 0x18 0x16 CH-LBQ3A2 4/1.31 0x00000000 LeftBQcoefficient
+p72 y= 669 x=  97.1 | 0x1C 0x16 CH-LBQ4B0 4/1.31 0x7FFFFFFF LeftBQcoefficient
+p72 y= 681 x=  97.7 | 0x20 0x16 CH-LBQ4B1 4/2.30 0x00000000 LeftBQcoefficient
+p72 y= 693 x=  97.7 | 0x24 0x16 CH-LBQ4B2 4/1.31 0x00000000 LeftBQcoefficient
+p72 y= 705 x=  97.7 | 0x28 0x16 CH-LBQ4A1 4/2.30 0x00000000 LeftBQcoefficient
+p72 y= 717 x=  97.1 | 0x2C 0x16 CH-LBQ4A2 4/1.31 0x00000000 LeftBQcoefficient
+p72 y= 730 x=  97.7 | 0x30 0x16 CH-LBQ5B0 4/1.31 0x7FFFFFFF LeftBQcoefficient
+p72 y= 750 x=  54.0 | 72
+p72 y= 751 x=  72.0 | TAS3251processflows SLAA799A–November2018–RevisedJanuary2019
+p72 y= 760 x= 439.3 | SubmitDocumentationFeedback
+p72 y= 772 x= 217.2 | Copyright©2018–2019,TexasInstrumentsIncorporated
+p73 y=  58 x= 406.2 | DSPMemoryMapforProcessFlow5
+p73 y=  59 x=  54.0 | www.ti.com
+p73 y=  82 x= 146.5 | Table11.DSPMemoryMapforProcessFlow5 —Book0x8C(continued)
+p73 y=  99 x=  98.7 | Sub Page RegisterName Numberof DefaultValue Description
+p73 y= 107 x=  91.3 | Address Bytes/Format
+p73 y= 120 x=  97.7 | 0x34 0x16 CH-LBQ5B1 4/2.30 0x00000000 LeftBQcoefficient
+p73 y= 132 x=  97.7 | 0x38 0x16 CH-LBQ5B2 4/1.31 0x00000000 LeftBQcoefficient
+p73 y= 144 x=  97.1 | 0x3C 0x16 CH-LBQ5A1 4/2.30 0x00000000 LeftBQcoefficient
+p73 y= 156 x=  97.7 | 0x40 0x16 CH-LBQ5A2 4/1.31 0x00000000 LeftBQcoefficient
+p73 y= 168 x=  97.7 | 0x44 0x16 CH-LBQ6B0 4/1.31 0x7FFFFFFF LeftBQcoefficient
+p73 y= 181 x=  97.7 | 0x48 0x16 CH-LBQ6B1 4/2.30 0x00000000 LeftBQcoefficient
+p73 y= 193 x=  97.1 | 0x4C 0x16 CH-LBQ6B2 4/1.31 0x00000000 LeftBQcoefficient
+p73 y= 205 x=  97.7 | 0x50 0x16 CH-LBQ6A1 4/2.30 0x00000000 LeftBQcoefficient
+p73 y= 217 x=  97.7 | 0x54 0x16 CH-LBQ6A2 4/1.31 0x00000000 LeftBQcoefficient
+p73 y= 229 x=  97.7 | 0x58 0x16 CH-LBQ7B0 4/1.31 0x7FFFFFFF LeftBQcoefficient
+p73 y= 242 x=  97.1 | 0x5C 0x16 CH-LBQ7B1 4/2.30 0x00000000 LeftBQcoefficient
+p73 y= 254 x=  97.7 | 0x60 0x16 CH-LBQ7B2 4/1.31 0x00000000 LeftBQcoefficient
+p73 y= 266 x=  97.7 | 0x64 0x16 CH-LBQ7A1 4/2.30 0x00000000 LeftBQcoefficient
+p73 y= 278 x=  97.7 | 0x68 0x16 CH-LBQ7A2 4/1.31 0x00000000 LeftBQcoefficient
+p73 y= 290 x=  97.1 | 0x6C 0x16 CH-LBQ8B0 4/1.31 0x7FFFFFFF LeftBQcoefficient
+p73 y= 303 x=  97.7 | 0x70 0x16 CH-LBQ8B1 4/2.30 0x00000000 LeftBQcoefficient
+p73 y= 315 x=  97.7 | 0x74 0x16 CH-LBQ8B2 4/1.31 0x00000000 LeftBQcoefficient
+p73 y= 327 x=  97.7 | 0x78 0x16 CH-LBQ8A1 4/2.30 0x00000000 LeftBQcoefficient
+p73 y= 339 x=  97.1 | 0x7C 0x16 CH-LBQ8A2 4/1.31 0x00000000 LeftBQcoefficient
+p73 y= 351 x=  97.7 | 0x08 0x17 CH-LBQ9B0 4/1.31 0x7FFFFFFF LeftBQcoefficient
+p73 y= 364 x=  97.1 | 0x0C 0x17 CH-LBQ9B1 4/2.30 0x00000000 LeftBQcoefficient
+p73 y= 376 x=  97.7 | 0x10 0x17 CH-LBQ9B2 4/1.31 0x00000000 LeftBQcoefficient
+p73 y= 388 x=  97.7 | 0x14 0x17 CH-LBQ9A1 4/2.30 0x00000000 LeftBQcoefficient
+p73 y= 400 x=  97.7 | 0x18 0x17 CH-LBQ9A2 4/1.31 0x00000000 LeftBQcoefficient
+p73 y= 412 x=  97.1 | 0x1C 0x17 CH-LBQ10B0 4/1.31 0x7FFFFFFF LeftBQcoefficient
+p73 y= 425 x=  97.7 | 0x20 0x17 CH-LBQ10B1 4/2.30 0x00000000 LeftBQcoefficient
+p73 y= 437 x=  97.7 | 0x24 0x17 CH-LBQ10B2 4/1.31 0x00000000 LeftBQcoefficient
+p73 y= 449 x=  97.7 | 0x28 0x17 CH-LBQ10A1 4/2.30 0x00000000 LeftBQcoefficient
+p73 y= 461 x=  97.1 | 0x2C 0x17 CH-LBQ10A2 4/1.31 0x00000000 LeftBQcoefficient
+p73 y= 473 x=  97.7 | 0x30 0x17 CH-LBQ11B0 4/1.31 0x7FFFFFFF LeftBQcoefficient
+p73 y= 486 x=  97.7 | 0x34 0x17 CH-LBQ11B1 4/2.30 0x00000000 LeftBQcoefficient
+p73 y= 498 x=  97.7 | 0x38 0x17 CH-LBQ11B2 4/1.31 0x00000000 LeftBQcoefficient
+p73 y= 510 x=  97.1 | 0x3C 0x17 CH-LBQ11A1 4/2.30 0x00000000 LeftBQcoefficient
+p73 y= 522 x=  97.7 | 0x40 0x17 CH-LBQ11A2 4/1.31 0x00000000 LeftBQcoefficient
+p73 y= 534 x=  97.7 | 0x44 0x17 CH-LBQ12B0 4/1.31 0x7FFFFFFF LeftBQcoefficient
+p73 y= 547 x=  97.7 | 0x48 0x17 CH-LBQ12B1 4/2.30 0x00000000 LeftBQcoefficient
+p73 y= 559 x=  97.1 | 0x4C 0x17 CH-LBQ12B2 4/1.31 0x00000000 LeftBQcoefficient
+p73 y= 571 x=  97.7 | 0x50 0x17 CH-LBQ12A1 4/2.30 0x00000000 LeftBQcoefficient
+p73 y= 583 x=  97.7 | 0x54 0x17 CH-LBQ12A2 4/1.31 0x00000000 LeftBQcoefficient
+p73 y= 595 x=  97.7 | 0x58 0x17 CH-LBQ13B0 4/1.31 0x7FFFFFFF LeftBQcoefficient
+p73 y= 608 x=  97.1 | 0x5C 0x17 CH-LBQ13B1 4/2.30 0x00000000 LeftBQcoefficient
+p73 y= 620 x=  97.7 | 0x60 0x17 CH-LBQ13B2 4/1.31 0x00000000 LeftBQcoefficient
+p73 y= 632 x=  97.7 | 0x64 0x17 CH-LBQ13A1 4/2.30 0x00000000 LeftBQcoefficient
+p73 y= 644 x=  97.7 | 0x68 0x17 CH-LBQ13A2 4/1.31 0x00000000 LeftBQcoefficient
+p73 y= 656 x=  97.1 | 0x6C 0x17 CH-LBQ14B0 4/1.31 0x7FFFFFFF LeftBQcoefficient
+p73 y= 669 x=  97.7 | 0x70 0x17 CH-LBQ14B1 4/2.30 0x00000000 LeftBQcoefficient
+p73 y= 681 x=  97.7 | 0x74 0x17 CH-LBQ14B2 4/1.31 0x00000000 LeftBQcoefficient
+p73 y= 693 x=  97.7 | 0x78 0x17 CH-LBQ14A1 4/2.30 0x00000000 LeftBQcoefficient
+p73 y= 705 x=  97.1 | 0x7C 0x17 CH-LBQ14A2 4/1.31 0x00000000 LeftBQcoefficient
+p73 y= 717 x= 290.5 | LEFTINTGAINBQ
+p73 y= 730 x=  97.7 | 0x08 0x18 CH-LBQ15B0 4/5.27 0x08000000 LeftgainscaleBQcoefficient
+p73 y= 750 x= 549.1 | 73
+p73 y= 751 x=  54.0 | SLAA799A–November2018–RevisedJanuary2019 TAS3251processflows
+p73 y= 760 x=  54.0 | SubmitDocumentationFeedback
+p73 y= 772 x= 217.2 | Copyright©2018–2019,TexasInstrumentsIncorporated
+p74 y=  58 x=  54.0 | DSPMemoryMapforProcessFlow5
+p74 y=  59 x= 512.9 | www.ti.com
+p74 y=  82 x= 146.5 | Table11.DSPMemoryMapforProcessFlow5 —Book0x8C(continued)
+p74 y=  99 x=  98.7 | Sub Page RegisterName Numberof DefaultValue Description
+p74 y= 107 x=  91.3 | Address Bytes/Format
+p74 y= 120 x=  97.1 | 0x0C 0x18 CH-LBQ15B1 4/6.26 0x00000000 LeftgainscaleBQcoefficient
+p74 y= 132 x=  97.7 | 0x10 0x18 CH-LBQ15B2 4/5.27 0x00000000 LeftgainscaleBQcoefficient
+p74 y= 144 x=  97.7 | 0x14 0x18 CH-LBQ15A1 4/2.30 0x00000000 LeftgainscaleBQcoefficient
+p74 y= 156 x=  97.7 | 0x18 0x18 CH-LBQ15A2 4/1.31 0x00000000 LeftgainscaleBQcoefficient
+p74 y= 168 x= 290.8 | EQRIGHT14BQs
+p74 y= 181 x=  97.1 | 0x1C 0x18 CH-RBQ1B0 4/1.31 0x7FFFFFFF RightBQcoefficient
+p74 y= 193 x=  97.7 | 0x20 0x18 CH-RBQ1B1 4/2.30 0x00000000 RightBQcoefficient
+p74 y= 205 x=  97.7 | 0x24 0x18 CH-RBQ1B2 4/1.31 0x00000000 RightBQcoefficient
+p74 y= 217 x=  97.7 | 0x28 0x18 CH-RBQ1A1 4/2.30 0x00000000 RightBQcoefficient
+p74 y= 229 x=  97.1 | 0x2C 0x18 CH-RBQ1A2 4/1.31 0x00000000 RightBQcoefficient
+p74 y= 242 x=  97.7 | 0x30 0x18 CH-RBQ2B0 4/1.31 0x7FFFFFFF RightBQcoefficient
+p74 y= 254 x=  97.7 | 0x34 0x18 CH-RBQ2B1 4/2.30 0x00000000 RightBQcoefficient
+p74 y= 266 x=  97.7 | 0x38 0x18 CH-RBQ2B2 4/1.31 0x00000000 RightBQcoefficient
+p74 y= 278 x=  97.1 | 0x3C 0x18 CH-RBQ2A1 4/2.30 0x00000000 RightBQcoefficient
+p74 y= 290 x=  97.7 | 0x40 0x18 CH-RBQ2A2 4/1.31 0x00000000 RightBQcoefficient
+p74 y= 303 x=  97.7 | 0x44 0x18 CH-RBQ3B0 4/1.31 0x7FFFFFFF RightBQcoefficient
+p74 y= 315 x=  97.7 | 0x48 0x18 CH-RBQ3B1 4/2.30 0x00000000 RightBQcoefficient
+p74 y= 327 x=  97.1 | 0x4C 0x18 CH-RBQ3B2 4/1.31 0x00000000 RightBQcoefficient
+p74 y= 339 x=  97.7 | 0x50 0x18 CH-RBQ3A1 4/2.30 0x00000000 RightBQcoefficient
+p74 y= 351 x=  97.7 | 0x54 0x18 CH-RBQ3A2 4/1.31 0x00000000 RightBQcoefficient
+p74 y= 364 x=  97.7 | 0x58 0x18 CH-RBQ4B0 4/1.31 0x7FFFFFFF RightBQcoefficient
+p74 y= 376 x=  97.1 | 0x5C 0x18 CH-RBQ4B1 4/2.30 0x00000000 RightBQcoefficient
+p74 y= 388 x=  97.7 | 0x60 0x18 CH-RBQ4B2 4/1.31 0x00000000 RightBQcoefficient
+p74 y= 400 x=  97.7 | 0x64 0x18 CH-RBQ4A1 4/2.30 0x00000000 RightBQcoefficient
+p74 y= 412 x=  97.7 | 0x68 0x18 CH-RBQ4A2 4/1.31 0x00000000 RightBQcoefficient
+p74 y= 425 x=  97.1 | 0x6C 0x18 CH-RBQ5B0 4/1.31 0x7FFFFFFF RightBQcoefficient
+p74 y= 437 x=  97.7 | 0x70 0x18 CH-RBQ5B1 4/2.30 0x00000000 RightBQcoefficient
+p74 y= 449 x=  97.7 | 0x74 0x18 CH-RBQ5B2 4/1.31 0x00000000 RightBQcoefficient
+p74 y= 461 x=  97.7 | 0x78 0x18 CH-RBQ5A1 4/2.30 0x00000000 RightBQcoefficient
+p74 y= 473 x=  97.1 | 0x7C 0x18 CH-RBQ5A2 4/1.31 0x00000000 RightBQcoefficient
+p74 y= 486 x=  97.7 | 0x08 0x19 CH-RBQ6B0 4/1.31 0x7FFFFFFF RightBQcoefficient
+p74 y= 498 x=  97.1 | 0x0C 0x19 CH-RBQ6B1 4/2.30 0x00000000 RightBQcoefficient
+p74 y= 510 x=  97.7 | 0x10 0x19 CH-RBQ6B2 4/1.31 0x00000000 RightBQcoefficient
+p74 y= 522 x=  97.7 | 0x14 0x19 CH-RBQ6A1 4/2.30 0x00000000 RightBQcoefficient
+p74 y= 534 x=  97.7 | 0x18 0x19 CH-RBQ6A2 4/1.31 0x00000000 RightBQcoefficient
+p74 y= 547 x=  97.1 | 0x1C 0x19 CH-RBQ7B0 4/1.31 0x7FFFFFFF RightBQcoefficient
+p74 y= 559 x=  97.7 | 0x20 0x19 CH-RBQ7B1 4/2.30 0x00000000 RightBQcoefficient
+p74 y= 571 x=  97.7 | 0x24 0x19 CH-RBQ7B2 4/1.31 0x00000000 RightBQcoefficient
+p74 y= 583 x=  97.7 | 0x28 0x19 CH-RBQ7A1 4/2.30 0x00000000 RightBQcoefficient
+p74 y= 595 x=  97.1 | 0x2C 0x19 CH-RBQ7A2 4/1.31 0x00000000 RightBQcoefficient
+p74 y= 608 x=  97.7 | 0x30 0x19 CH-RBQ8B0 4/1.31 0x7FFFFFFF RightBQcoefficient
+p74 y= 620 x=  97.7 | 0x34 0x19 CH-RBQ8B1 4/2.30 0x00000000 RightBQcoefficient
+p74 y= 632 x=  97.7 | 0x38 0x19 CH-RBQ8B2 4/1.31 0x00000000 RightBQcoefficient
+p74 y= 644 x=  97.1 | 0x3C 0x19 CH-RBQ8A1 4/2.30 0x00000000 RightBQcoefficient
+p74 y= 656 x=  97.7 | 0x40 0x19 CH-RBQ8A2 4/1.31 0x00000000 RightBQcoefficient
+p74 y= 669 x=  97.7 | 0x44 0x19 CH-RBQ9B0 4/1.31 0x7FFFFFFF RightBQcoefficient
+p74 y= 681 x=  97.7 | 0x48 0x19 CH-RBQ9B1 4/2.30 0x00000000 RightBQcoefficient
+p74 y= 693 x=  97.1 | 0x4C 0x19 CH-RBQ9B2 4/1.31 0x00000000 RightBQcoefficient
+p74 y= 705 x=  97.7 | 0x50 0x19 CH-RBQ9A1 4/2.30 0x00000000 RightBQcoefficient
+p74 y= 717 x=  97.7 | 0x54 0x19 CH-RBQ9A2 4/1.31 0x00000000 RightBQcoefficient
+p74 y= 730 x=  97.7 | 0x58 0x19 CH-RBQ10B0 4/1.31 0x7FFFFFFF RightBQcoefficient
+p74 y= 750 x=  54.0 | 74
+p74 y= 751 x=  72.0 | TAS3251processflows SLAA799A–November2018–RevisedJanuary2019
+p74 y= 760 x= 439.3 | SubmitDocumentationFeedback
+p74 y= 772 x= 217.2 | Copyright©2018–2019,TexasInstrumentsIncorporated
+p75 y=  58 x= 406.2 | DSPMemoryMapforProcessFlow5
+p75 y=  59 x=  54.0 | www.ti.com
+p75 y=  82 x= 146.5 | Table11.DSPMemoryMapforProcessFlow5 —Book0x8C(continued)
+p75 y=  99 x=  98.7 | Sub Page RegisterName Numberof DefaultValue Description
+p75 y= 107 x=  91.3 | Address Bytes/Format
+p75 y= 120 x=  97.1 | 0x5C 0x19 CH-RBQ10B1 4/2.30 0x00000000 RightBQcoefficient
+p75 y= 132 x=  97.7 | 0x60 0x19 CH-RBQ10B2 4/1.31 0x00000000 RightBQcoefficient
+p75 y= 144 x=  97.7 | 0x64 0x19 CH-RBQ10A1 4/2.30 0x00000000 RightBQcoefficient
+p75 y= 156 x=  97.7 | 0x68 0x19 CH-RBQ10A2 4/1.31 0x00000000 RightBQcoefficient
+p75 y= 168 x=  97.1 | 0x6C 0x19 CH-RBQ11B0 4/1.31 0x7FFFFFFF RightBQcoefficient
+p75 y= 181 x=  97.7 | 0x70 0x19 CH-RBQ11B1 4/2.30 0x00000000 RightBQcoefficient
+p75 y= 193 x=  97.7 | 0x74 0x19 CH-RBQ11B2 4/1.31 0x00000000 RightBQcoefficient
+p75 y= 205 x=  97.7 | 0x78 0x19 CH-RBQ11A1 4/2.30 0x00000000 RightBQcoefficient
+p75 y= 217 x=  97.1 | 0x7C 0x19 CH-RBQ11A2 4/1.31 0x00000000 RightBQcoefficient
+p75 y= 229 x=  97.7 | 0x08 0x1A CH-RBQ12B0 4/1.31 0x7FFFFFFF RightBQcoefficient
+p75 y= 242 x=  97.1 | 0x0C 0x1A CH-RBQ12B1 4/2.30 0x00000000 RightBQcoefficient
+p75 y= 254 x=  97.7 | 0x10 0x1A CH-RBQ12B2 4/1.31 0x00000000 RightBQcoefficient
+p75 y= 266 x=  97.7 | 0x14 0x1A CH-RBQ12A1 4/2.30 0x00000000 RightBQcoefficient
+p75 y= 278 x=  97.7 | 0x18 0x1A CH-RBQ12A2 4/1.31 0x00000000 RightBQcoefficient
+p75 y= 290 x=  97.1 | 0x1C 0x1A CH-RBQ13B0 4/1.31 0x7FFFFFFF RightBQcoefficient
+p75 y= 303 x=  97.7 | 0x20 0x1A CH-RBQ13B1 4/2.30 0x00000000 RightBQcoefficient
+p75 y= 315 x=  97.7 | 0x24 0x1A CH-RBQ13B2 4/1.31 0x00000000 RightBQcoefficient
+p75 y= 327 x=  97.7 | 0x28 0x1A CH-RBQ13A1 4/2.30 0x00000000 RightBQcoefficient
+p75 y= 339 x=  97.1 | 0x2C 0x1A CH-RBQ13A2 4/1.31 0x00000000 RightBQcoefficient
+p75 y= 351 x=  97.7 | 0x30 0x1A CH-RBQ14B0 4/1.31 0x7FFFFFFF RightBQcoefficient
+p75 y= 364 x=  97.7 | 0x34 0x1A CH-RBQ14B1 4/2.30 0x00000000 RightBQcoefficient
+p75 y= 376 x=  97.7 | 0x38 0x1A CH-RBQ14B2 4/1.31 0x00000000 RightBQcoefficient
+p75 y= 388 x=  97.1 | 0x3C 0x1A CH-RBQ14A1 4/2.30 0x00000000 RightBQcoefficient
+p75 y= 400 x=  97.7 | 0x40 0x1A CH-RBQ14A2 4/1.31 0x00000000 RightBQcoefficient
+p75 y= 412 x= 288.3 | RIGHTINTGAINBQ
+p75 y= 425 x=  97.7 | 0x44 0x1A CH-RBQ15B0 4/5.27 0x08000000 RightgainscaleBQcoefficient
+p75 y= 437 x=  97.7 | 0x48 0x1A CH-RBQ15B1 4/6.26 0x00000000 RightgainscaleBQcoefficient
+p75 y= 449 x=  97.1 | 0x4C 0x1A CH-RBQ15B2 4/5.27 0x00000000 RightgainscaleBQcoefficient
+p75 y= 461 x=  97.7 | 0x50 0x1A CH-RBQ15A1 4/2.30 0x00000000 RightgainscaleBQcoefficient
+p75 y= 473 x=  97.7 | 0x54 0x1A CH-RBQ15A2 4/1.31 0x00000000 RightgainscaleBQcoefficient
+p75 y= 486 x= 279.6 | VOLUMEALPHAFILTER
+p75 y= 498 x=  97.7 | 0x58 0x1A SofteningFilterAlpha 4/1.31 0x00A7264A Volumetimeconstant
+p75 y= 510 x= 288.8 | PHASEOPTIMIZER
+p75 y= 522 x= 206.3 | 0x600x1ADelayLeft4/32.00x00000000LeftChannelPhaseOptimizer
+p75 y= 534 x=  97.7 | 0x64 0x1A DelayRight 4/32.0 0x00000000 RightChannelPhaseOptimizer
+p75 y= 547 x=  97.7 | 0x68 0x1A DelaySub 4/32.0 0x00000000 SubChannelPhaseOptimizer
+p75 y= 559 x= 300.4 | MAINDRC1
+p75 y= 571 x=  97.1 | 0x6C 0x1A DRC1Energy 4/1.31 0x7FFFFFFF DRC1EnergyTimeconstant
+p75 y= 583 x=  97.7 | 0x70 0x1A DRC1Attack 4/1.31 0x7FFFFFFF DRC1AttackTimeconstant
+p75 y= 595 x=  97.7 | 0x74 0x1A DRC1Decay 4/1.31 0x7FFFFFFF DRC1DecayTimeconstant
+p75 y= 608 x=  97.7 | 0x78 0x1A K0_1 4/9.23 0x00000000 DRC1Region1Slope(comp/Exp)
+p75 y= 620 x=  97.1 | 0x7C 0x1A K1_1 4/9.23 0x00000000 DRC1Region2Slope(comp/Exp)
+p75 y= 632 x=  97.7 | 0x08 0x1B K2_1 4/9.23 0x00000000 DRC1Region3Slope(comp/Exp)
+p75 y= 644 x=  97.1 | 0x0C 0x1B T1_1 4/9.23 0xE7000000 DRC1Threshold1
+p75 y= 656 x=  97.7 | 0x10 0x1B T2_1 4/9.23 0xFE800000 DRC1Threshold2
+p75 y= 669 x=  97.7 | 0x14 0x1B off1_1 4/9.23 0x00000000 DRC1Offset1
+p75 y= 681 x=  97.7 | 0x18 0x1B off2_1 4/9.23 0x00000000 DRC1Offset2
+p75 y= 693 x= 300.4 | MAINDRC2
+p75 y= 705 x=  97.1 | 0x1C 0x1B DRC2Energy 4/1.31 0x7FFFFFFF DRC2EnergyTimeconstant
+p75 y= 717 x=  97.7 | 0x20 0x1B DRC2Attack 4/1.31 0x7FFFFFFF DRC2AttackTimeconstant
+p75 y= 730 x=  97.7 | 0x24 0x1B DRC2Decay 4/1.31 0x7FFFFFFF DRC2DecayTimeconstant
+p75 y= 750 x= 549.1 | 75
+p75 y= 751 x=  54.0 | SLAA799A–November2018–RevisedJanuary2019 TAS3251processflows
+p75 y= 760 x=  54.0 | SubmitDocumentationFeedback
+p75 y= 772 x= 217.2 | Copyright©2018–2019,TexasInstrumentsIncorporated
+p76 y=  58 x=  54.0 | DSPMemoryMapforProcessFlow5
+p76 y=  59 x= 512.9 | www.ti.com
+p76 y=  82 x= 146.5 | Table11.DSPMemoryMapforProcessFlow5 —Book0x8C(continued)
+p76 y=  99 x=  98.7 | Sub Page RegisterName Numberof DefaultValue Description
+p76 y= 107 x=  91.3 | Address Bytes/Format
+p76 y= 120 x=  97.7 | 0x28 0x1B k0_2 4/9.23 0x00000000 DRC2Region1Slope(comp/Exp)
+p76 y= 132 x=  97.1 | 0x2C 0x1B k1_2 4/9.23 0x00000000 DRC2Region2Slope(comp/Exp)
+p76 y= 144 x=  97.7 | 0x30 0x1B k2_2 4/9.23 0x00000000 DRC2Region3Slope(comp/Exp)
+p76 y= 156 x=  97.7 | 0x34 0x1B t1_2 4/9.23 0xE7000000 DRC2Threshold1
+p76 y= 168 x=  97.7 | 0x38 0x1B t2_2 4/9.23 0xFE800000 DRC2Threshold2
+p76 y= 181 x=  97.1 | 0x3C 0x1B off1_2 4/9.23 0x00000000 DRC2Offset1
+p76 y= 193 x=  97.7 | 0x40 0x1B off2_2 4/9.23 0x00000000 DRC2Offset2
+p76 y= 205 x= 300.4 | MAINDRC3
+p76 y= 217 x=  97.7 | 0x44 0x1B DRC3Energy 4/1.31 0x7FFFFFFF DRC3EnergyTimeconstant
+p76 y= 229 x=  97.7 | 0x48 0x1B DRC3Attack 4/1.31 0x7FFFFFFF DRC3AttackTimeconstant
+p76 y= 242 x=  97.1 | 0x4C 0x1B DRC3Decay 4/1.31 0x7FFFFFFF DRC3DecayTimeconstant
+p76 y= 254 x=  97.7 | 0x50 0x1B k0_3 4/9.23 0x00000000 DRC3Region1Slope(comp/Exp)
+p76 y= 266 x=  97.7 | 0x54 0x1B k1_3 4/9.23 0x00000000 DRC3Region2Slope(comp/Exp)
+p76 y= 278 x=  97.7 | 0x58 0x1B k1_3 4/9.23 0x00000000 DRC3Region3Slope(comp/Exp)
+p76 y= 290 x=  97.1 | 0x5C 0x1B t1_3 4/9.23 0xE7000000 DRC3Threshold1
+p76 y= 303 x=  97.7 | 0x60 0x1B t2_3 4/9.23 0xFE800000 DRC3Threshold2
+p76 y= 315 x=  97.7 | 0x64 0x1B off1_3 4/9.23 0x00000000 DRC3Offset1
+p76 y= 327 x=  97.7 | 0x68 0x1B off2_3 4/9.23 0x00000000 DRC3Offset2
+p76 y= 339 x= 301.9 | SUBDRC1
+p76 y= 351 x=  97.1 | 0x6C 0x1B CH-SubDRC1Energy 4/1.31 0x7FFFFFFF SubChannelDRC1EnergyTimeconstant
+p76 y= 364 x=  97.7 | 0x70 0x1B CH-SubDRC1Attack 4/1.31 0x7FFFFFFF SubChannelDRC1AttackTimeconstant
+p76 y= 376 x=  97.7 | 0x74 0x1B CH-SubDRC1Decay 4/1.31 0x7FFFFFFF SubChannelDRC1DecayTimeconstant
+p76 y= 388 x=  97.7 | 0x78 0x1B CH-SubK0_1 4/9.23 0x00000000 SubChannelDRC1Region1Slope
+p76 y= 396 x= 466.5 | (comp/Exp)
+p76 y= 408 x=  97.1 | 0x7C 0x1B CH-SubK1_1 4/9.23 0x00000000 SubChannelDRC1Region2Slope
+p76 y= 416 x= 466.5 | (comp/Exp)
+p76 y= 428 x=  97.7 | 0x08 0x1C CH-SubK2_1 4/9.23 0x00000000 SubChannelDRC1Region3Slope
+p76 y= 436 x= 466.5 | (comp/Exp)
+p76 y= 449 x=  97.1 | 0x0C 0x1C CH-SubT1_1 4/9.23 0xE7000000 SubChannelDRC1Threshold1
+p76 y= 461 x=  97.7 | 0x10 0x1C CH-SubT2_1 4/9.23 0xFE800000 SubChannelDRC1Threshold2
+p76 y= 473 x=  97.7 | 0x14 0x1C CH-Suboff1_1 4/9.23 0x00000000 SubChannelDRC1Offset1
+p76 y= 485 x=  97.7 | 0x18 0x1C CH-Suboff2_1 4/9.23 0x00000000 SubChannelDRC1Offset2
+p76 y= 497 x= 301.9 | SUBDRC2
+p76 y= 510 x=  97.1 | 0x1C 0x1C CH-SubDRC2Energy 4/1.31 0x7FFFFFFF SubChannelDRC2EnergyTimeconstant
+p76 y= 522 x=  97.7 | 0x20 0x1C CH-SubDRC2Attack 4/1.31 0x7FFFFFFF SubChannelDRC2AttackTimeconstant
+p76 y= 534 x=  97.7 | 0x24 0x1C CH-SubDRC2Decay 4/1.31 0x7FFFFFFF SubChannelDRC2DecayTimeconstant
+p76 y= 546 x=  97.7 | 0x28 0x1C CH-Subk0_2 4/9.23 0x00000000 SubChannelDRC2Region1Slope
+p76 y= 554 x= 466.5 | (comp/Exp)
+p76 y= 566 x=  97.1 | 0x2C 0x1C CH-Subk1_2 4/9.23 0x00000000 SubChannelDRC2Region2Slope
+p76 y= 574 x= 466.5 | (comp/Exp)
+p76 y= 587 x=  97.7 | 0x30 0x1C CH-Subk2_2 4/9.23 0x00000000 SubChannelDRC2Region3Slope
+p76 y= 595 x= 466.5 | (comp/Exp)
+p76 y= 607 x=  97.7 | 0x34 0x1C CH-Subt1_2 4/9.23 0xE7000000 SubChannelDRC2Threshold1
+p76 y= 619 x=  97.7 | 0x38 0x1C CH-Subt2_2 4/9.23 0xFE800000 SubChannelDRC2Threshold2
+p76 y= 631 x=  97.1 | 0x3C 0x1C CH-Suboff1_2 4/9.23 0x00000000 SubChannelDRC2Offset1
+p76 y= 643 x=  97.7 | 0x40 0x1C CH-Suboff2_2 4/9.23 0x00000000 SubChannelDRC2Offset2
+p76 y= 656 x= 301.9 | SUBDRC3
+p76 y= 668 x=  97.7 | 0x44 0x1C CH-SubDRC3Energy 4/1.31 0x7FFFFFFF SubChannelDRC3EnergyTimeconstant
+p76 y= 680 x=  97.7 | 0x48 0x1C CH-SubDRC3Attack 4/1.31 0x7FFFFFFF SubChannelDRC3AttackTimeconstant
+p76 y= 692 x=  97.1 | 0x4C 0x1C CH-SubDRC3Decay 4/1.31 0x7FFFFFFF SubChannelDRC3DecayTimeconstant
+p76 y= 704 x=  97.7 | 0x50 0x1C CH-Subk0_3 4/9.23 0x00000000 SubChannelDRC3Region1Slope
+p76 y= 712 x= 466.5 | (comp/Exp)
+p76 y= 750 x=  54.0 | 76
+p76 y= 751 x=  72.0 | TAS3251processflows SLAA799A–November2018–RevisedJanuary2019
+p76 y= 760 x= 439.3 | SubmitDocumentationFeedback
+p76 y= 772 x= 217.2 | Copyright©2018–2019,TexasInstrumentsIncorporated
+p77 y=  58 x= 406.2 | DSPMemoryMapforProcessFlow5
+p77 y=  59 x=  54.0 | www.ti.com
+p77 y=  82 x= 146.5 | Table11.DSPMemoryMapforProcessFlow5 —Book0x8C(continued)
+p77 y=  99 x=  98.7 | Sub Page RegisterName Numberof DefaultValue Description
+p77 y= 107 x=  91.3 | Address Bytes/Format
+p77 y= 120 x=  97.7 | 0x54 0x1C CH-Subk1_3 4/9.23 0x00000000 SubChannelDRC1Region2Slope
+p77 y= 128 x= 466.5 | (comp/Exp)
+p77 y= 140 x=  97.7 | 0x58 0x1C CH-Subk1_3 4/9.23 0x00000000 SubChannelDRC3Region3Slope
+p77 y= 148 x= 466.5 | (comp/Exp)
+p77 y= 160 x=  97.1 | 0x5C 0x1C CH-Subt1_3 4/9.23 0xE7000000 SubChannelDRC3Threshold1
+p77 y= 172 x=  97.7 | 0x60 0x1C CH-Subt2_3 4/9.23 0xFE800000 SubChannelDRC3Threshold2
+p77 y= 184 x=  97.7 | 0x64 0x1C CH-Suboff1_3 4/9.23 0x00000000 SubChannelDRC3Offset1
+p77 y= 197 x=  97.7 | 0x68 0x1C CH-Suboff2_3 4/9.23 0x00000000 SubChannelDRC3Offset2
+p77 y= 209 x= 289.8 | SPATIALIZERBQs
+p77 y= 221 x=  97.1 | 0x6C 0x1C BQ1B0 4/1.31 0x7FFFFFFF SpatializerBQcoefficient
+p77 y= 233 x=  97.7 | 0x70 0x1C BQ1B1 4/2.30 0x00000000 SpatializerBQcoefficient
+p77 y= 245 x=  97.7 | 0x74 0x1C BQ1B2 4/1.31 0x00000000 SpatializerBQcoefficient
+p77 y= 258 x=  97.7 | 0x78 0x1C BQ1A1 4/2.30 0x00000000 SpatializerBQcoefficient
+p77 y= 270 x=  97.1 | 0x7C 0x1C BQ1A2 4/1.31 0x00000000 SpatializerBQcoefficient
+p77 y= 282 x=  97.7 | 0x08 0x1D BQ2B0 4/1.31 0x7FFFFFFF SpatializerBQcoefficient
+p77 y= 294 x=  97.1 | 0x0C 0x1D BQ2B1 4/2.30 0x00000000 SpatializerBQcoefficient
+p77 y= 306 x=  97.7 | 0x10 0x1D BQ2B2 4/1.31 0x00000000 SpatializerBQcoefficient
+p77 y= 319 x=  97.7 | 0x14 0x1D BQ2A1 4/2.30 0x00000000 SpatializerBQcoefficient
+p77 y= 331 x=  97.7 | 0x18 0x1D BQ2A2 4/1.31 0x00000000 SpatializerBQcoefficient
+p77 y= 343 x= 292.7 | DPEQCONTROL
+p77 y= 355 x=  97.1 | 0x1C 0x1D Alpha 4/1.31 0x02DEAD00 DPEQSenseEnergy
+p77 y= 367 x= 292.1 | TIMECONSTANT
+p77 y= 380 x=  97.7 | 0x20 0x1D Gain 4/1.31 0x74013901 DPEQThresholdGain
+p77 y= 392 x=  97.7 | 0x24 0x1D Offset 4/1.31 0x0020C49B DPEQThresholdOffset
+p77 y= 404 x= 277.0 | SUBCHANNELCONTROL
+p77 y= 416 x=  97.7 | 0x28 0x1D NoSub 4/32.0 0x00000000 SubChannelFlag
+p77 y= 428 x= 297.5 | THDCLIPPER
+p77 y= 441 x=  97.1 | 0x2C 0x1D CH-LRTHDBoost 4/9.23 0x00800000 THDLRChannelprescalecoefficient
+p77 y= 453 x=  97.7 | 0x30 0x1D CH-SubTHDBoost 4/9.23 0x00800000 THDSubChannelprescalecoefficient
+p77 y= 465 x=  97.7 | 0x34 0x1D CH-LFineVolume 4/2.30 0x3FFFFFFF THDLChannelpostscalecoefficient
+p77 y= 477 x=  97.7 | 0x38 0x1D CH-RFineVolume 4/2.30 0x3FFFFFFF THDRChannelpostscalecoefficient
+p77 y= 489 x=  97.1 | 0x3C 0x1D CH-SubFineVolume 4/2.30 0x3FFFFFFF THDSubChannelpostscalecoefficient
+p77 y= 502 x= 291.4 | DRCMIXERGAIN
+p77 y= 514 x=  97.7 | 0x40 0x1D DRC1MixerGain 4/9.23 0x00800000 DRC1MixerGaincoefficient
+p77 y= 526 x=  97.7 | 0x44 0x1D DRC2MixerGain 4/9.23 0x00000000 DRC2MixerGaincoefficient
+p77 y= 538 x=  97.7 | 0x48 0x1D DRC3MixerGain 4/9.23 0x00000000 DRC3MixerGaincoefficient
+p77 y= 550 x=  97.1 | 0x4C 0x1D CH-SubDRC1MixerGain 4/9.23 0x00800000 CH-SubDRC1MixerGaincoefficient
+p77 y= 563 x=  97.7 | 0x50 0x1D CH-SubDRC2MixerGain 4/9.23 0x00000000 CH-SubDRC2MixerGaincoefficient
+p77 y= 575 x=  97.7 | 0x54 0x1D CH-SubDRC3MixerGain 4/9.23 0x00000000 CH-SubDRC3MixerGaincoefficient
+p77 y= 587 x= 304.3 | GANGEQ
+p77 y= 599 x=  97.7 | 0x58 0x1D GangLREQ 4/32.0 0x00000000 GangLeftandRightEQflag
+p77 y= 611 x= 298.3 | INPUTMIXER
+p77 y= 624 x=  97.1 | 0x5C 0x1D LefttoLeft 4/9.23 0x00800000 LeftChannelMixerLeftInputGain
+p77 y= 636 x=  97.7 | 0x60 0x1D RighttoLeft 4/9.23 0x00000000 LeftChannelMixerRight
+p77 y= 648 x=  97.7 | 0x64 0x1D LefttoRight 4/9.23 0x00000000 RightChannelMixerLeft
+p77 y= 660 x=  97.7 | 0x68 0x1D RighttoRight 4/9.23 0x00800000 RightChannelMixerRightInputGain
+p77 y= 672 x= 290.0 | MIX/GAINADJUST
+p77 y= 685 x=  97.1 | 0x6C 0x1D LefttoSub 4/9.23 0x00000000 SubChannelMixerLeftInputGain
+p77 y= 697 x=  97.7 | 0x70 0x1D RighttoSub 4/9.23 0x00000000 SubChannelMixerRightInputGain
+p77 y= 709 x=  97.7 | 0x74 0x1D SubMixScratchL 4/9.23 0x00800000 SubChannelMixerScratchLInputGain
+p77 y= 721 x=  97.7 | 0x78 0x1D SubMixScratchR 4/9.23 0x00000000 SubChannelMixerScratchRInputGain
+p77 y= 750 x= 549.1 | 77
+p77 y= 751 x=  54.0 | SLAA799A–November2018–RevisedJanuary2019 TAS3251processflows
+p77 y= 760 x=  54.0 | SubmitDocumentationFeedback
+p77 y= 772 x= 217.2 | Copyright©2018–2019,TexasInstrumentsIncorporated
+p78 y=  58 x=  54.0 | DSPMemoryMapforProcessFlow5
+p78 y=  59 x= 512.9 | www.ti.com
+p78 y=  82 x= 146.5 | Table11.DSPMemoryMapforProcessFlow5 —Book0x8C(continued)
+p78 y=  99 x=  98.7 | Sub Page RegisterName Numberof DefaultValue Description
+p78 y= 107 x=  91.3 | Address Bytes/Format
+p78 y= 120 x=  97.1 | 0x7C 0x1D BassMonoLeft 4/9.23 0x00800000 MonoLeftInputGain
+p78 y= 132 x=  97.7 | 0x08 0x1E BassMonoRight 4/9.23 0x00800000 MonoRightInputGain
+p78 y= 144 x=  97.1 | 0x0C 0x1E BassMonoSub 4/9.23 0x00000000 MonoSubInputGain
+p78 y= 156 x= 285.7 | SPATIALIZERLEVEL
+p78 y= 168 x=  97.7 | 0x10 0x1E SpatializerLevel 4/9.23 0x00000000 SpatializerLevelcoefficient
+p78 y= 181 x= 284.4 | OUTPUTCROSSBAR
+p78 y= 193 x=  97.7 | 0x14 0x1E DigitalLeftfromLeft 4/9.23 0x00800000 I2SLeftoutputgainfromleft
+p78 y= 205 x=  97.7 | 0x18 0x1E DigitalLeftfromRight 4/9.23 0x00000000 I2SLeftoutputgainfromRight
+p78 y= 217 x=  97.1 | 0x1C 0x1E DigitalLeftfromSub 4/9.23 0x00000000 I2SLeftoutputgainfromSub
+p78 y= 229 x=  97.7 | 0x20 0x1E DigitalRightfromLeft 4/9.23 0x00000000 I2SRightoutputgainfromleft
+p78 y= 242 x=  97.7 | 0x24 0x1E DigitalRightfromRight 4/9.23 0x00800000 I2SRightoutputgainfromRight
+p78 y= 254 x=  97.7 | 0x28 0x1E DigitalRightfromSub 4/9.23 0x00000000 I2SRightoutputgainfromSub
+p78 y= 266 x=  97.1 | 0x2C 0x1E AnalogLeftfromLeft 4/9.23 0x00800000 AnalogLeftoutputgainfromleft
+p78 y= 278 x=  97.7 | 0x30 0x1E AnalogLeftfromRight 4/9.23 0x00000000 AnalogLeftoutputgainfromRight
+p78 y= 290 x=  97.7 | 0x34 0x1E AnalogLeftfromSub 4/9.23 0x00000000 AnalogLeftoutputgainfromSub
+p78 y= 303 x=  97.7 | 0x38 0x1E AnalogRightfromLeft 4/9.23 0x00000000 AnalogRightoutputgainfromleft
+p78 y= 315 x=  97.1 | 0x3C 0x1E AnalogRightfromRight 4/9.23 0x00800000 AnalogRightoutputgainfromRight
+p78 y= 327 x=  97.7 | 0x40 0x1E AnalogRightfromSub 4/9.23 0x00000000 AnalogRightoutputgainfromSub
+p78 y= 339 x= 287.6 | VOLUMECONTROL
+p78 y= 351 x=  97.7 | 0x44 0x1E CH-LVolume 4/9.23 0x00800000 LeftChannelvolumecoefficient
+p78 y= 364 x=  97.7 | 0x48 0x1E CH-RVolume 4/9.23 0x00800000 RightChannelvolumecoefficient
+p78 y= 376 x=  97.1 | 0x4C 0x1E CH-SubVolume 4/9.23 0x00800000 SubChannelvolumecoefficient
+p78 y= 388 x= 288.3 | DPEQGAINSCALE
+p78 y= 400 x=  97.7 | 0x50 0x1E DPEQSenseScale 4/2.30 0x40000000 DPEQSenseInputGain
+p78 y= 412 x=  97.7 | 0x54 0x1E DPEQLowScale 4/6.26 0x04000000 DPEQLowInputGain
+p78 y= 425 x=  97.7 | 0x58 0x1E DPEQHighScale 4/6.26 0x04000000 DPEQHighInputGain
+p78 y= 437 x= 313.6 | AGL
+p78 y= 449 x=  97.1 | 0x6C 0x1E CH-SubAttackThreshold 4/1.31 0x40000000 SubChannelThresholdlinear
+p78 y= 461 x=  97.7 | 0x70 0x1E CH-SubSofteningFilterAlpha 4/1.31 0x06153BD1 SubChannelAGLAlphaTimeconstant
+p78 y= 473 x=  97.7 | 0x74 0x1E CH-SubAttackRate 4/1.31 0x0001B4E8 SubChannelAGLAttackTimeconstant
+p78 y= 486 x=  97.7 | 0x78 0x1E CH-SubAGLEnable 4/1.31 0x40000000 SubChannelAGLEnableflag
+p78 y= 498 x=  97.7 | 0x08 0x1F CH-SubSofteningFilterOmega 4/1.31 0x79EAC42F SubChannelAGLOmegaTimeconstant
+p78 y= 510 x=  97.1 | 0x0C 0x1F CH-SubReleaseRate 4/1.31 0x00002BB1 SubChannelAGLReleaseTimeconstant
+p78 y= 522 x=  97.7 | 0x14 0x1F AttackThreshold 4/1.31 0x40000000 Thresholdlinear
+p78 y= 534 x=  97.7 | 0x18 0x1F SofteningFilterAlpha 4/1.31 0x06153BD1 AGLAlphaTimeconstant
+p78 y= 547 x=  97.1 | 0x1C 0x1F AttackRate 4/1.31 0x0001B4E8 AGLAttackTimeconstant
+p78 y= 559 x=  97.7 | 0x20 0x1F AGLEnable 4/1.31 0x40000000 AGLEnableflag
+p78 y= 571 x=  97.7 | 0x28 0x1F SofteningFilterOmega 4/1.31 0x79EAC42F AGLOmegaTimeconstant
+p78 y= 583 x=  97.1 | 0x2C 0x1F ReleaseRate 4/1.31 0x00002BB1 AGLReleaseTimeconstant
+p78 y= 750 x=  54.0 | 78
+p78 y= 751 x=  84.0 | TAS3251processflows SLAA799A–November2018–RevisedJanuary2019
+p78 y= 760 x= 439.3 | SubmitDocumentationFeedback
+p78 y= 768 x= 217.2 | Copyright©2018–2019,TexasInstrumentsIncorporated
