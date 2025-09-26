@@ -3,6 +3,7 @@ from PySide6 import QtWidgets
 
 from .eq_tab import EqTab
 from .crossover_tab import CrossoverTab
+from .exporter import export_pf5_from_ui
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -19,3 +20,13 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.xo_tab = CrossoverTab(self)
         tabs.addTab(self.xo_tab, "Crossover")
+
+        # Toolbar with Export action
+        tb = self.addToolBar('Main')
+        act_export = tb.addAction('Export PF5 JSONL')
+        act_export.triggered.connect(self._on_export)
+
+    def _on_export(self):
+        out = export_pf5_from_ui(self, self.xo_tab)
+        if out:
+            QtWidgets.QMessageBox.information(self, 'Export', f'Wrote {out}')

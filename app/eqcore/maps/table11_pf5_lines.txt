@@ -335,7 +335,7 @@ p75 y= 473 x=  97.7 | 0x54 0x1A CH-RBQ15A2 4/1.31 0x00000000 RightgainscaleBQcoe
 p75 y= 486 x= 279.6 | VOLUMEALPHAFILTER
 p75 y= 498 x=  97.7 | 0x58 0x1A SofteningFilterAlpha 4/1.31 0x00A7264A Volumetimeconstant
 p75 y= 510 x= 288.8 | PHASEOPTIMIZER
-p75 y= 522 x= 206.3 | 0x600x1ADelayLeft4/32.00x00000000LeftChannelPhaseOptimizer
+p75 y= 522 x= 206.3 | 0x60 0x1A DelayLeft 4/32.0 0x00000000 LeftChannelPhaseOptimizer
 p75 y= 534 x=  97.7 | 0x64 0x1A DelayRight 4/32.0 0x00000000 RightChannelPhaseOptimizer
 p75 y= 547 x=  97.7 | 0x68 0x1A DelaySub 4/32.0 0x00000000 SubChannelPhaseOptimizer
 p75 y= 559 x= 300.4 | MAINDRC1

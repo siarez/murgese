@@ -283,6 +283,7 @@
 {"type": "section", "title": "VOLUME ALPHA FILTER"}
 {"page": "0x1A", "subaddr": "0x58", "name": "SofteningFilterAlpha", "bytes": 4, "format": "1.31", "default": "0x00A7264A", "description": "Volumetimeconstant"}
 {"type": "section", "title": "PHASE OPTIMIZER"}
+{"page": "0x1A", "subaddr": "0x60", "name": "DelayLeft", "bytes": 4, "format": "32.0", "default": "0x00000000", "description": "LeftChannelPhaseOptimizer"}
 {"page": "0x1A", "subaddr": "0x64", "name": "DelayRight", "bytes": 4, "format": "32.0", "default": "0x00000000", "description": "RightChannelPhaseOptimizer"}
 {"page": "0x1A", "subaddr": "0x68", "name": "DelaySub", "bytes": 4, "format": "32.0", "default": "0x00000000", "description": "SubChannelPhaseOptimizer"}
 {"type": "section", "title": "MAIN DRC 1"}
