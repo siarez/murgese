@@ -104,6 +104,26 @@ class CrossoverTab(QtWidgets.QWidget):
         row_a_h.addWidget(self.lbl_delay_A)
         row_a_h.addStretch(1)
         la.addWidget(row_a)
+
+        # Channel A gain (dB)
+        row_ag = QtWidgets.QWidget()
+        row_ag_h = QtWidgets.QHBoxLayout(row_ag)
+        row_ag_h.setContentsMargins(0, 0, 0, 0)
+        row_ag_h.setSpacing(8)
+        row_ag_h.addWidget(QtWidgets.QLabel("Gain:"))
+        self.spin_gain_A = QtWidgets.QDoubleSpinBox()
+        self.spin_gain_A.setRange(-20.0, 20.0)
+        self.spin_gain_A.setDecimals(2)
+        self.spin_gain_A.setSingleStep(0.50)
+        self.spin_gain_A.setSuffix(" dB")
+        self.spin_gain_A.setToolTip("Channel A gain applied before summation")
+        self.spin_gain_A.valueChanged.connect(self._update_xo_plots)
+        row_ag_h.addWidget(self.spin_gain_A)
+        self.lbl_gain_A = QtWidgets.QLabel("≈ 1.00×")
+        row_ag_h.addWidget(self.lbl_gain_A)
+        self.spin_gain_A.valueChanged.connect(self._on_gain_changed)
+        row_ag_h.addStretch(1)
+        la.addWidget(row_ag)
         self.table_xo_A = QtWidgets.QTableWidget(self._xo_num_sections, 6)
         self.table_xo_A.setHorizontalHeaderLabels(
             ["#", "Mode", "Topology", "Ripple / dB", "Cut-off / Hz", "Color"])
@@ -115,6 +135,9 @@ class CrossoverTab(QtWidgets.QWidget):
         self.table_xo_A.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
         self.table_xo_A.horizontalHeader().setSectionResizeMode(5, QtWidgets.QHeaderView.Fixed)
         self.table_xo_A.setColumnWidth(5, 36)
+        # Smooth scrolling instead of per-row jumps
+        self.table_xo_A.setHorizontalScrollMode(QtWidgets.QAbstractItemView.ScrollPerPixel)
+        self.table_xo_A.setVerticalScrollMode(QtWidgets.QAbstractItemView.ScrollPerPixel)
         la.addWidget(self.table_xo_A)
 
         # Channel B group
@@ -142,6 +165,26 @@ class CrossoverTab(QtWidgets.QWidget):
         row_b_h.addWidget(self.lbl_delay_B)
         row_b_h.addStretch(1)
         lb.addWidget(row_b)
+
+        # Channel B gain (dB)
+        row_bg = QtWidgets.QWidget()
+        row_bg_h = QtWidgets.QHBoxLayout(row_bg)
+        row_bg_h.setContentsMargins(0, 0, 0, 0)
+        row_bg_h.setSpacing(8)
+        row_bg_h.addWidget(QtWidgets.QLabel("Gain:"))
+        self.spin_gain_B = QtWidgets.QDoubleSpinBox()
+        self.spin_gain_B.setRange(-20.0, 20.0)
+        self.spin_gain_B.setDecimals(2)
+        self.spin_gain_B.setSingleStep(0.50)
+        self.spin_gain_B.setSuffix(" dB")
+        self.spin_gain_B.setToolTip("Channel B gain applied before summation")
+        self.spin_gain_B.valueChanged.connect(self._update_xo_plots)
+        row_bg_h.addWidget(self.spin_gain_B)
+        self.lbl_gain_B = QtWidgets.QLabel("≈ 1.00×")
+        row_bg_h.addWidget(self.lbl_gain_B)
+        self.spin_gain_B.valueChanged.connect(self._on_gain_changed)
+        row_bg_h.addStretch(1)
+        lb.addWidget(row_bg)
         self.table_xo_B = QtWidgets.QTableWidget(self._xo_num_sections, 6)
         self.table_xo_B.setHorizontalHeaderLabels(
             ["#", "Mode", "Topology", "Ripple / dB", "Cut-off / Hz", "Color"])
@@ -153,6 +196,9 @@ class CrossoverTab(QtWidgets.QWidget):
         self.table_xo_B.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
         self.table_xo_B.horizontalHeader().setSectionResizeMode(5, QtWidgets.QHeaderView.Fixed)
         self.table_xo_B.setColumnWidth(5, 36)
+        # Smooth scrolling instead of per-row jumps
+        self.table_xo_B.setHorizontalScrollMode(QtWidgets.QAbstractItemView.ScrollPerPixel)
+        self.table_xo_B.setVerticalScrollMode(QtWidgets.QAbstractItemView.ScrollPerPixel)
         lb.addWidget(self.table_xo_B)
 
         tables.addWidget(gb_a, 1)
@@ -169,6 +215,7 @@ class CrossoverTab(QtWidgets.QWidget):
         self._init_xo_rows(self.table_xo_B, channel='B')
         self._update_xo_plots()
         self._update_delay_labels()
+        self._update_gain_labels()
 
     def set_fs(self, fs: float):
         if abs(fs - getattr(self, '_fs', 48000.0)) > 1e-9:
@@ -176,11 +223,26 @@ class CrossoverTab(QtWidgets.QWidget):
             self._freqs = default_freq_grid(self._fs, n=2048, fmin=10.0)
             self._update_xo_plots()
             self._update_delay_labels()
+            self._update_gain_labels()
 
     def _on_delay_changed(self, *_):
         # Update labels and plots (phase of electrical sum changes)
         self._update_delay_labels()
         self._update_xo_plots()
+
+    def _on_gain_changed(self, *_):
+        # Update linear gain labels and plots
+        self._update_gain_labels()
+        self._update_xo_plots()
+
+    def _update_gain_labels(self):
+        def fmt(db: float) -> str:
+            lin = 10.0 ** (float(db) / 20.0)
+            return f"≈ {lin:.2f}×"
+        if hasattr(self, 'spin_gain_A') and hasattr(self, 'lbl_gain_A'):
+            self.lbl_gain_A.setText(fmt(self.spin_gain_A.value()))
+        if hasattr(self, 'spin_gain_B') and hasattr(self, 'lbl_gain_B'):
+            self.lbl_gain_B.setText(fmt(self.spin_gain_B.value()))
 
     def _update_delay_labels(self):
         # Compute and show distance equivalents for current delays
@@ -230,13 +292,14 @@ class CrossoverTab(QtWidgets.QWidget):
         spin_fc.valueChanged.connect(self._update_xo_plots)
         table.setCellWidget(row, 4, spin_fc)
 
-        # Color swatch
+        # Color swatch (fill entire cell background)
         color = row_color(row if channel == 'A' else row + 6)
-        swatch = QtWidgets.QLabel()
-        swatch.setFixedWidth(28)
-        swatch.setFixedHeight(14)
-        swatch.setStyleSheet(f"background-color: {color.name()}; border: 1px solid #555;")
-        table.setCellWidget(row, 5, swatch)
+        color_item = QtWidgets.QTableWidgetItem("")
+        # Not editable and not selectable so selection highlight won't gray it out
+        color_item.setFlags(color_item.flags() & ~QtCore.Qt.ItemIsEditable & ~QtCore.Qt.ItemIsSelectable)
+        color_item.setBackground(color)
+        color_item.setToolTip(color.name())
+        table.setItem(row, 5, color_item)
 
         # Initialize enabled state
         self._update_xo_row_enabled(table, row)
@@ -332,7 +395,9 @@ class CrossoverTab(QtWidgets.QWidget):
                                           name=f"A{row+1}")
                 self._xo_curves_A.append(curve)
             acc_db_A += H_sec
-        self.curve_xo_A.setData(self._freqs, acc_db_A)
+        # Apply channel A gain to cascade curve
+        gA_db = float(getattr(self, 'spin_gain_A', None).value()) if hasattr(self, 'spin_gain_A') else 0.0
+        self.curve_xo_A.setData(self._freqs, acc_db_A + gA_db)
 
         # Channel B
         acc_db_B = np.zeros_like(self._freqs, dtype=float)
@@ -348,7 +413,8 @@ class CrossoverTab(QtWidgets.QWidget):
                                           name=f"B{row+1}")
                 self._xo_curves_B.append(curve)
             acc_db_B += H_sec
-        self.curve_xo_B.setData(self._freqs, acc_db_B)
+        gB_db = float(getattr(self, 'spin_gain_B', None).value()) if hasattr(self, 'spin_gain_B') else 0.0
+        self.curve_xo_B.setData(self._freqs, acc_db_B + gB_db)
 
         # Electrical sum using complex responses (accounts for phase/polarity)
         sections_A = []
@@ -371,7 +437,10 @@ class CrossoverTab(QtWidgets.QWidget):
                 H_A = H_A * np.exp(-1j * w * nA)
             if nB:
                 H_B = H_B * np.exp(-1j * w * nB)
-        H_sum = H_A + H_B
+        # Apply linear gains for the electrical sum
+        gA = 10.0 ** (gA_db/20.0)
+        gB = 10.0 ** (gB_db/20.0)
+        H_sum = H_A * gA + H_B * gB
         acc_db_sum = 20.0 * np.log10(np.maximum(np.abs(H_sum), 1e-12))
         self.curve_xo_sum.setData(self._freqs, acc_db_sum)
 

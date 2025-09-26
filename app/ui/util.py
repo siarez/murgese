@@ -1,5 +1,5 @@
 from __future__ import annotations
-from PySide6 import QtWidgets
+from PySide6 import QtWidgets, QtGui
 import pyqtgraph as pg
 
 
@@ -15,7 +15,19 @@ def mk_dspin(lo, hi, val, step, suffix, decimals) -> QtWidgets.QDoubleSpinBox:
 
 
 def row_color(index: int):
-    return pg.intColor(index, hues=12, values=1, maxValue=255)
+    """Return a perceptually distinct QColor for a given index.
+
+    Uses golden‑angle hue spacing in HSL space to maximize separation between
+    consecutive colors. Alternates lightness slightly to add contrast for
+    adjacent entries while keeping good readability on both light/dark Fusion
+    palettes.
+    """
+    golden = 0.61803398875  # golden ratio conjugate
+    # Start away from pure red to avoid clashing with error highlights
+    h = (0.12 + index * golden) % 1.0  # hue in [0,1)
+    s = 0.75
+    l = 0.55 if (index % 2 == 0) else 0.47
+    return QtGui.QColor.fromHslF(h, s, l)
 
 
 def build_plot(name_cascade: str):

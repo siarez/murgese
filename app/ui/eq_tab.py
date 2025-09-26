@@ -132,13 +132,14 @@ class EqTab(QtWidgets.QWidget):
             spin.valueChanged.connect(self._refresh_selected_coeffs)
             self.table.setCellWidget(row, col, spin)
 
-        # Color swatch
+        # Color swatch (fill entire cell background)
         color = row_color(row)
-        swatch = QtWidgets.QLabel()
-        swatch.setFixedWidth(28)
-        swatch.setFixedHeight(14)
-        swatch.setStyleSheet(f"background-color: {color.name()}; border: 1px solid #555;")
-        self.table.setCellWidget(row, 5, swatch)
+        color_item = QtWidgets.QTableWidgetItem("")
+        # Not editable and not selectable so selection highlight won't gray it out
+        color_item.setFlags(color_item.flags() & ~QtCore.Qt.ItemIsEditable & ~QtCore.Qt.ItemIsSelectable)
+        color_item.setBackground(color)
+        color_item.setToolTip(color.name())
+        self.table.setItem(row, 5, color_item)
 
         # Initialize enabled state
         self._update_row_enabled(row)

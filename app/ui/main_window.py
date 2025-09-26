@@ -4,6 +4,7 @@ from PySide6 import QtWidgets
 from .eq_tab import EqTab
 from .crossover_tab import CrossoverTab
 from .exporter import export_pf5_from_ui
+from .input_mixer_tab import InputMixerTab
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -15,6 +16,10 @@ class MainWindow(QtWidgets.QMainWindow):
         tabs = QtWidgets.QTabWidget(self)
         self.setCentralWidget(tabs)
 
+        # Add tabs in process-flow order: Input Mixer first, then EQ, then Crossover
+        self.mixer_tab = InputMixerTab(self)
+        tabs.addTab(self.mixer_tab, "Input Mixer")
+
         self.eq_tab = EqTab(self)
         tabs.addTab(self.eq_tab, "EQ")
 
@@ -23,7 +28,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # Toolbar with Export action
         tb = self.addToolBar('Main')
-        act_export = tb.addAction('Export PF5 JSONL')
+        act_export = tb.addAction('Export Config')
         act_export.triggered.connect(self._on_export)
 
     def _on_export(self):
