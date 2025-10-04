@@ -45,6 +45,10 @@ class EqTab(QtWidgets.QWidget):
         self._fs = 48000.0
         self._freqs = default_freq_grid(self._fs, n=2048, fmin=10.0)
         self._section_curves: List[pg.PlotDataItem] = []
+        # Apply initial view limits now that _fs is defined
+        from .util import apply_viewbox_limits, add_reset_button
+        apply_viewbox_limits(self.plot, self._fs)
+        add_reset_button(self.plot, self._fs)
 
         self._init_fixed_rows()
         self.table.selectRow(0)
@@ -54,6 +58,8 @@ class EqTab(QtWidgets.QWidget):
         if abs(fs - getattr(self, '_fs', 48000.0)) > 1e-9:
             self._fs = float(fs)
             self._freqs = default_freq_grid(self._fs, n=2048, fmin=10.0)
+            from .util import apply_viewbox_limits
+            apply_viewbox_limits(self.plot, self._fs)
             self._update_plot()
 
     def _build_readout_group(self) -> QtWidgets.QGroupBox:
@@ -70,7 +76,19 @@ class EqTab(QtWidgets.QWidget):
         self.txt_coeffs.setLineWrapMode(QtWidgets.QPlainTextEdit.NoWrap)
         font = QtGui.QFontDatabase.systemFont(QtGui.QFontDatabase.FixedFont)
         self.txt_coeffs.setFont(font)
+        # Clarify TI PPC3 denominator sign convention
+        self.txt_coeffs.setToolTip(
+            "TI PPC3/TAS register convention stores denominator as A1 = −a1, A2 = −a2.\n"
+            "Hex values shown for A1/A2 follow this convention."
+        )
         layout.addWidget(self.txt_coeffs)
+        note = QtWidgets.QLabel("A1/A2 shown as −a1/−a2 (TI PPC3)")
+        note.setStyleSheet("color: palette(mid); font-size: 11px;")
+        note.setToolTip(
+            "TI PPC3/TAS register convention stores denominator as A1 = −a1, A2 = −a2.\n"
+            "Hex values shown for A1/A2 follow this convention."
+        )
+        layout.addWidget(note)
         # Saturation warning for Stage Gain (BQ15)
         self.lbl_warn = QtWidgets.QLabel("")
         self.lbl_warn.setStyleSheet("color: #b00020; font-weight: bold;")
@@ -96,6 +114,11 @@ class EqTab(QtWidgets.QWidget):
         # After the widget is in place, fix the color column width
         self.table.horizontalHeader().setSectionResizeMode(5, QtWidgets.QHeaderView.Fixed)
         self.table.setColumnWidth(5, 36)
+        # Smooth, slower scrolling for consistency
+        self.table.setHorizontalScrollMode(QtWidgets.QAbstractItemView.ScrollPerPixel)
+        self.table.setVerticalScrollMode(QtWidgets.QAbstractItemView.ScrollPerPixel)
+        self.table.verticalScrollBar().setSingleStep(6)
+        self.table.horizontalScrollBar().setSingleStep(10)
         return gb
 
     def _init_fixed_rows(self):
@@ -126,6 +149,11 @@ class EqTab(QtWidgets.QWidget):
         # Params
         spin_f0 = mk_dspin(5, 96_000, f0, 10.0, " Hz", 2)
         spin_q  = mk_dspin(0.1, 50.0, q, 0.1, "", 3)
+        spin_q.setToolTip(
+            "RBJ Q for peaking/filters.\n"
+            "Note: In TI PPC3 peaking, the displayed Q ≈ 2× RBJ Q\n"
+            "(e.g., PPC3 Q=1.4 ≈ RBJ Q=0.7)."
+        )
         spin_g  = mk_dspin(-24.0, 24.0, gain, 0.5, " dB", 2)
         for col, spin in [(2, spin_f0), (3, spin_q), (4, spin_g)]:
             spin.valueChanged.connect(self._update_plot)
@@ -220,8 +248,10 @@ class EqTab(QtWidgets.QWidget):
                     hb0 = q_to_hex_twos(b0, 31)
                     hb1 = q_to_hex_twos(b1, 30)
                     hb2 = q_to_hex_twos(b2, 31)
-                ha1 = q_to_hex_twos(a1, 30)
-                ha2 = q_to_hex_twos(a2, 31)
+                # TI PPC3/TAS convention stores denominator as -a1, -a2
+                # Use standard rounding quantization
+                ha1 = q_to_hex_twos(-a1, 30)
+                ha2 = q_to_hex_twos(-a2, 31)
                 # Label stage gain explicitly for clarity
                 if row == n:
                     lines.append(f"Stage Gain (BQ15): b0={hb0}, b1={hb1}, b2={hb2}, a1={ha1}, a2={ha2}")

@@ -42,7 +42,18 @@ class CrossoverTab(QtWidgets.QWidget):
         self.txt_coeffs_A.setLineWrapMode(QtWidgets.QPlainTextEdit.NoWrap)
         font = QtGui.QFontDatabase.systemFont(QtGui.QFontDatabase.FixedFont)
         self.txt_coeffs_A.setFont(font)
+        self.txt_coeffs_A.setToolTip(
+            "TI PPC3/TAS register convention stores denominator as A1 = −a1, A2 = −a2.\n"
+            "Hex values shown for A1/A2 follow this convention."
+        )
         ca_v.addWidget(self.txt_coeffs_A)
+        noteA = QtWidgets.QLabel("A1/A2 shown as −a1/−a2 (TI PPC3)")
+        noteA.setStyleSheet("color: palette(mid); font-size: 11px;")
+        noteA.setToolTip(
+            "TI PPC3/TAS register convention stores denominator as A1 = −a1, A2 = −a2.\n"
+            "Hex values shown for A1/A2 follow this convention."
+        )
+        ca_v.addWidget(noteA)
         left_v.addWidget(gb_ca)
 
         gb_cb = QtWidgets.QGroupBox("Channel B Coeffs (a0=1)")
@@ -52,6 +63,17 @@ class CrossoverTab(QtWidgets.QWidget):
         self.txt_coeffs_B.setLineWrapMode(QtWidgets.QPlainTextEdit.NoWrap)
         self.txt_coeffs_B.setFont(font)
         cb_v.addWidget(self.txt_coeffs_B)
+        self.txt_coeffs_B.setToolTip(
+            "TI PPC3/TAS register convention stores denominator as A1 = −a1, A2 = −a2.\n"
+            "Hex values shown for A1/A2 follow this convention."
+        )
+        noteB = QtWidgets.QLabel("A1/A2 shown as −a1/−a2 (TI PPC3)")
+        noteB.setStyleSheet("color: palette(mid); font-size: 11px;")
+        noteB.setToolTip(
+            "TI PPC3/TAS register convention stores denominator as A1 = −a1, A2 = −a2.\n"
+            "Hex values shown for A1/A2 follow this convention."
+        )
+        cb_v.addWidget(noteB)
         left_v.addWidget(gb_cb)
 
         root.addWidget(left, 0)
@@ -135,9 +157,11 @@ class CrossoverTab(QtWidgets.QWidget):
         self.table_xo_A.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
         self.table_xo_A.horizontalHeader().setSectionResizeMode(5, QtWidgets.QHeaderView.Fixed)
         self.table_xo_A.setColumnWidth(5, 36)
-        # Smooth scrolling instead of per-row jumps
+        # Smooth, slower scrolling
         self.table_xo_A.setHorizontalScrollMode(QtWidgets.QAbstractItemView.ScrollPerPixel)
         self.table_xo_A.setVerticalScrollMode(QtWidgets.QAbstractItemView.ScrollPerPixel)
+        self.table_xo_A.verticalScrollBar().setSingleStep(6)   # pixels per wheel step
+        self.table_xo_A.horizontalScrollBar().setSingleStep(10)
         la.addWidget(self.table_xo_A)
 
         # Channel B group
@@ -196,9 +220,11 @@ class CrossoverTab(QtWidgets.QWidget):
         self.table_xo_B.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
         self.table_xo_B.horizontalHeader().setSectionResizeMode(5, QtWidgets.QHeaderView.Fixed)
         self.table_xo_B.setColumnWidth(5, 36)
-        # Smooth scrolling instead of per-row jumps
+        # Smooth, slower scrolling
         self.table_xo_B.setHorizontalScrollMode(QtWidgets.QAbstractItemView.ScrollPerPixel)
         self.table_xo_B.setVerticalScrollMode(QtWidgets.QAbstractItemView.ScrollPerPixel)
+        self.table_xo_B.verticalScrollBar().setSingleStep(6)
+        self.table_xo_B.horizontalScrollBar().setSingleStep(10)
         lb.addWidget(self.table_xo_B)
 
         tables.addWidget(gb_a, 1)
@@ -209,6 +235,10 @@ class CrossoverTab(QtWidgets.QWidget):
         self._freqs = default_freq_grid(self._fs, n=2048, fmin=10.0)
         self._xo_curves_A: List[pg.PlotDataItem] = []
         self._xo_curves_B: List[pg.PlotDataItem] = []
+        # Apply initial view limits now that _fs is defined
+        from .util import apply_viewbox_limits, add_reset_button
+        apply_viewbox_limits(self.plot_xo, self._fs)
+        add_reset_button(self.plot_xo, self._fs)
 
         # Populate rows
         self._init_xo_rows(self.table_xo_A, channel='A')
@@ -221,6 +251,8 @@ class CrossoverTab(QtWidgets.QWidget):
         if abs(fs - getattr(self, '_fs', 48000.0)) > 1e-9:
             self._fs = float(fs)
             self._freqs = default_freq_grid(self._fs, n=2048, fmin=10.0)
+            from .util import apply_viewbox_limits
+            apply_viewbox_limits(self.plot_xo, self._fs)
             self._update_xo_plots()
             self._update_delay_labels()
             self._update_gain_labels()
@@ -272,7 +304,7 @@ class CrossoverTab(QtWidgets.QWidget):
 
         # Mode
         cb_mode = QtWidgets.QComboBox()
-        cb_mode.addItems(["All-pass", "Low-pass", "High-pass"])  # unity or LPF/HPF
+        cb_mode.addItems(["All-pass", "Phase shift 1st", "Phase shift 2nd", "Low-pass", "High-pass"])  # AP, AP1, AP2, LPF/HPF
         cb_mode.currentIndexChanged.connect(lambda _=None, r=row, t=table: self._on_mode_changed(t, r))
         table.setCellWidget(row, 1, cb_mode)
 
@@ -282,12 +314,13 @@ class CrossoverTab(QtWidgets.QWidget):
         cb_topo.currentIndexChanged.connect(lambda _=None, t=table, r=row: (self._update_xo_row_enabled(t, r), self._update_xo_plots()))
         table.setCellWidget(row, 2, cb_topo)
 
-        # Ripple (per BQ)
+        # Ripple (per BQ). Not used in Phase shift.
         spin_ripple = mk_dspin(0.01, 3.0, 0.50, 0.10, " dB", 2)
+        spin_ripple.setToolTip("Chebyshev ripple (dB). Not used in Phase shift.")
         spin_ripple.valueChanged.connect(self._update_xo_plots)
         table.setCellWidget(row, 3, spin_ripple)
 
-        # Cut-off
+        # Cut-off / center frequency
         spin_fc = mk_dspin(5, 96_000, 2000.0, 10.0, " Hz", 2)
         spin_fc.valueChanged.connect(self._update_xo_plots)
         table.setCellWidget(row, 4, spin_fc)
@@ -314,17 +347,29 @@ class CrossoverTab(QtWidgets.QWidget):
 
     def _update_xo_row_enabled(self, table: QtWidgets.QTableWidget, row: int):
         is_ap = self._xo_is_allpass_row(table, row)
-        # Disable Topology, Ripple, Cut-off when All-pass
-        for col in (2, 3, 4):
-            w = table.cellWidget(row, col)
-            if w is not None:
-                w.setEnabled(not is_ap)
-        # Additionally, enable Ripple only when topology is Chebyshev I
-        cb_topo = table.cellWidget(row, 2)
+        # Disable/enable fields depending on mode
+        mode = table.cellWidget(row, 1).currentText().lower() if table.cellWidget(row, 1) else ""
+        # Topology widget
+        w_topo = table.cellWidget(row, 2)
         w_ripple = table.cellWidget(row, 3)
-        if cb_topo is not None and w_ripple is not None:
-            is_cheby = (cb_topo.currentText().lower().startswith('cheby'))
-            w_ripple.setEnabled((not is_ap) and is_cheby)
+        w_fc = table.cellWidget(row, 4)
+        if w_topo:
+            # Topology disabled for All-pass and both Phase shift modes
+            w_topo.setEnabled(not (is_ap or mode.startswith('phase shift')))
+        if w_fc:
+            # Frequency enabled for all except All-pass (unity)
+            w_fc.setEnabled(not is_ap)
+        if w_ripple:
+            if mode.startswith('phase shift 2nd'):
+                # Use Ripple control as Q for Phase shift 2nd
+                w_ripple.setEnabled(True)
+                w_ripple.setSuffix(" Q")
+            else:
+                # Default behavior: enabled only for Chebyshev I and non-All-pass
+                cb_topo = table.cellWidget(row, 2)
+                is_cheby = (cb_topo.currentText().lower().startswith('cheby')) if cb_topo else False
+                w_ripple.setEnabled((not is_ap) and is_cheby)
+                w_ripple.setSuffix(" dB")
 
     def _xo_q_for_topology(self, topo: str, ripple_db: float) -> float:
         t = topo.lower()
@@ -353,6 +398,13 @@ class CrossoverTab(QtWidgets.QWidget):
         if mode.lower().startswith('all'):
             sos = BiquadParams(typ=FilterType.ALLPASS, fs=self._fs, f0=fc, q=1.0, gain_db=0.0)
             sos = design_biquad(sos)
+        elif mode.lower().startswith('phase shift 1st'):
+            # 1st-order all-pass using center frequency only
+            sos = design_biquad(BiquadParams(typ=FilterType.ALLPASS1, fs=self._fs, f0=fc, q=1.0, gain_db=0.0))
+        elif mode.lower().startswith('phase shift 2nd'):
+            # 2nd-order all-pass using Q from the Ripple/Q control
+            qv = max(1e-3, float(table.cellWidget(row, 3).value()))
+            sos = design_biquad(BiquadParams(typ=FilterType.ALLPASS2, fs=self._fs, f0=fc, q=qv, gain_db=0.0))
         else:
             typ = FilterType.LPF if mode.lower().startswith('low') else FilterType.HPF
             # Topology selection
@@ -389,7 +441,7 @@ class CrossoverTab(QtWidgets.QWidget):
             invert_this = self.chk_xo_pol_A.isChecked() and (row == 0)
             sos = self._design_xo_biquad(self.table_xo_A, row, invert_polarity=invert_this)
             H_sec = sos_response_db(sos, self._freqs, self._fs)
-            if not self._xo_is_allpass_row(self.table_xo_A, row):
+            if not (self._xo_is_allpass_row(self.table_xo_A, row) or self.table_xo_A.cellWidget(row,1).currentText().lower().startswith('phase')):
                 curve = self.plot_xo.plot(self._freqs, H_sec,
                                           pen=pg.mkPen(row_color(row), width=1, style=QtCore.Qt.DashLine),
                                           name=f"A{row+1}")
@@ -407,7 +459,7 @@ class CrossoverTab(QtWidgets.QWidget):
             sos = self._design_xo_biquad(self.table_xo_B, row, invert_polarity=invert_this)
             H_sec = sos_response_db(sos, self._freqs, self._fs)
             color = row_color(row + 6)
-            if not self._xo_is_allpass_row(self.table_xo_B, row):
+            if not (self._xo_is_allpass_row(self.table_xo_B, row) or self.table_xo_B.cellWidget(row,1).currentText().lower().startswith('phase')):
                 curve = self.plot_xo.plot(self._freqs, H_sec,
                                           pen=pg.mkPen(color, width=1, style=QtCore.Qt.DashLine),
                                           name=f"B{row+1}")
@@ -454,8 +506,9 @@ class CrossoverTab(QtWidgets.QWidget):
                     b0 = q_to_hex_twos(sos.b0, 31)
                     b1 = q_to_hex_twos(sos.b1, 30)
                     b2 = q_to_hex_twos(sos.b2, 31)
-                    a1 = q_to_hex_twos(sos.a1, 30)
-                    a2 = q_to_hex_twos(sos.a2, 31)
+                    # TI PPC3/TAS convention stores denominator as -a1, -a2
+                    a1 = q_to_hex_twos(-sos.a1, 30)
+                    a2 = q_to_hex_twos(-sos.a2, 31)
                     lines.append(
                         f"{row+1:>2}: b0={b0}, b1={b1}, b2={b2}, a1={a1}, a2={a2}"
                     )

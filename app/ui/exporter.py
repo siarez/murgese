@@ -116,15 +116,17 @@ def export_pf5_from_ui(parent: QtWidgets.QWidget, xo: CrossoverTab,
                         if tag == 'B0': obj['default'] = q_to_hex_twos(b0, 27); return True
                         if tag == 'B1': obj['default'] = q_to_hex_twos(b1, 26); return True
                         if tag == 'B2': obj['default'] = q_to_hex_twos(b2, 27); return True
-                        if tag == 'A1': obj['default'] = q_to_hex_twos(a1, 30); return True
-                        if tag == 'A2': obj['default'] = q_to_hex_twos(a2, 31); return True
+                        # Denominator uses TI convention -a1,-a2
+                        if tag == 'A1': obj['default'] = q_to_hex_twos(-a1, 30); return True
+                        if tag == 'A2': obj['default'] = q_to_hex_twos(-a2, 31); return True
                         return False
                     else:
                         if tag == 'B0': obj['default'] = q_to_hex_twos(b0, 31); return True
                         if tag == 'B1': obj['default'] = q_to_hex_twos(b1, 30); return True
                         if tag == 'B2': obj['default'] = q_to_hex_twos(b2, 31); return True
-                        if tag == 'A1': obj['default'] = q_to_hex_twos(a1, 30); return True
-                        if tag == 'A2': obj['default'] = q_to_hex_twos(a2, 31); return True
+                        # Denominator uses TI convention -a1,-a2
+                        if tag == 'A1': obj['default'] = q_to_hex_twos(-a1, 30); return True
+                        if tag == 'A2': obj['default'] = q_to_hex_twos(-a2, 31); return True
                         return False
 
                 # CROSS OVER (A) and SUB CROSS OVER (B)

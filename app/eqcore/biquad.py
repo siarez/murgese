@@ -34,6 +34,8 @@ class FilterType(str, enum.Enum):
     BPF = "Band-pass (const peak)"
     NOTCH = "Notch"
     ALLPASS = "All-pass (Unity)"
+    ALLPASS1 = "All-pass 1st (Phase)"
+    ALLPASS2 = "All-pass 2nd (Phase)"
 
 @dataclass
 class BiquadParams:
@@ -206,6 +208,62 @@ def _rbj_notch(p: BiquadParams) -> SOS:
     inv = 1.0/a0
     return SOS(b0*inv, b1*inv, b2*inv, a1*inv, a2*inv)
 
+def _allpass1(p: BiquadParams) -> SOS:
+    """1st-order digital all-pass with unity magnitude.
+
+    H(z) = (a + z^{-1}) / (1 + a z^{-1}) where
+      a = (1 - tan(w0/2)) / (1 + tan(w0/2)),  w0 = 2*pi*f0/fs
+
+    Q is ignored for this topology.
+    """
+    w0 = 2*np.pi*p.f0/p.fs
+    t = np.tan(w0/2.0)
+    if np.isinf(t):
+        a = -1.0  # limit as tan -> inf
+    else:
+        a = (1.0 - t) / (1.0 + t)
+    # With a0 normalized to 1
+    b0 = a
+    b1 = 1.0
+    b2 = 0.0
+    a1 = a
+    a2 = 0.0
+    return SOS(b0, b1, b2, a1, a2)
+
+def _rbj_allpass2(p: BiquadParams) -> SOS:
+    """RBJ 2nd-order all-pass (phase) biquad with a0 normalized to 1.
+
+    Magnitude is unity for all frequencies; phase rotates around f0 with Q.
+    """
+    w0 = 2*np.pi*p.f0/p.fs
+    alpha = np.sin(w0)/(2*p.q)
+    cosw = np.cos(w0)
+    b0 = 1 - alpha
+    b1 = -2*cosw
+    b2 = 1 + alpha
+    a0 = 1 + alpha
+    a1 = -2*cosw
+    a2 = 1 - alpha
+    inv = 1.0/a0
+    return SOS(b0*inv, b1*inv, b2*inv, a1*inv, a2*inv)
+
+def _rbj_allpass2(p: BiquadParams) -> SOS:
+    """RBJ 2nd-order all-pass (phase) biquad with a0 normalized to 1.
+
+    Magnitude is unity for all frequencies; phase rotates around f0 with Q.
+    """
+    w0 = 2*np.pi*p.f0/p.fs
+    alpha = np.sin(w0)/(2*p.q)
+    cosw = np.cos(w0)
+    b0 = 1 - alpha
+    b1 = -2*cosw
+    b2 = 1 + alpha
+    a0 = 1 + alpha
+    a1 = -2*cosw
+    a2 = 1 - alpha
+    inv = 1.0/a0
+    return SOS(b0*inv, b1*inv, b2*inv, a1*inv, a2*inv)
+
 def design_biquad(p: BiquadParams) -> SOS:
     """Dispatch to the appropriate biquad design based on FilterType.
 
@@ -214,6 +272,10 @@ def design_biquad(p: BiquadParams) -> SOS:
     """
     if p.typ == FilterType.ALLPASS:
         return SOS(1.0, 0.0, 0.0, 0.0, 0.0)
+    if p.typ == FilterType.ALLPASS1:
+        return _allpass1(p)
+    if p.typ == FilterType.ALLPASS2:
+        return _rbj_allpass2(p)
     if p.typ == FilterType.PEAK:
         return _rbj_peak(p)
     if p.typ == FilterType.LSHELF:

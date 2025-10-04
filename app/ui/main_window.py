@@ -3,6 +3,7 @@ from PySide6 import QtWidgets
 
 from .eq_tab import EqTab
 from .crossover_tab import CrossoverTab
+from .coef_check_tab import CoefCheckTab
 from .exporter import export_pf5_from_ui
 from .input_mixer_tab import InputMixerTab
 
@@ -25,6 +26,9 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.xo_tab = CrossoverTab(self)
         tabs.addTab(self.xo_tab, "Crossover")
+
+        self.coef_tab = CoefCheckTab(self)
+        tabs.addTab(self.coef_tab, "Coef Check")
 
         # Toolbar with Export action
         tb = self.addToolBar('Main')

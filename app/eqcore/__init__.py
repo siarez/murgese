@@ -1,4 +1,5 @@
 from .biquad import (
+    SOS,
     FilterType,
     BiquadParams,
     design_biquad,

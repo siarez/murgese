@@ -52,8 +52,8 @@ class InputMixerTab(QtWidgets.QWidget):
             "<div style='line-height: 140%;'>"
             "Set the 2×2 mix matrix in signed Q9.23 (≈ −256 to +255.999999).<br>"
             "Identity mix: L‑to‑L = 1.0, R‑to‑R = 1.0, others = 0.0.<br>"
-            "L_out = L_in × L‑to‑L + R_in × R‑to‑L<br>"
-            "R_out = L_in × L‑to‑R + R_in × R‑to‑R"
+            "L_out = (L_in × L‑to‑L) + (R_in × R‑to‑L)<br>"
+            "R_out = (L_in × L‑to‑R) + (R_in × R‑to‑R)"
             "</div>"
         )
         help_lbl = QtWidgets.QLabel(help_html)
@@ -66,6 +66,14 @@ class InputMixerTab(QtWidgets.QWidget):
         else:
             f.setPixelSize(14)
         help_lbl.setFont(f)
+        # Add a subtle border and padding that adapts to palette
+        help_lbl.setStyleSheet(
+            "QLabel {"
+            "  border: 1px solid palette(mid);"
+            "  border-radius: 4px;"
+            "  padding: 6px;"
+            "}"
+        )
         vright.addWidget(help_lbl)
 
         grid = QtWidgets.QGridLayout()
