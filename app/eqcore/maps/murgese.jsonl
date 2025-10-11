@@ -396,7 +396,7 @@
 {"page": "0x1D", "subaddr": "0x74", "name": "SubMixScratchL", "bytes": 4, "format": "9.23", "default": "0x00800000", "description": "SubChannelMixerScratchLInputGain"}
 {"page": "0x1D", "subaddr": "0x78", "name": "SubMixScratchR", "bytes": 4, "format": "9.23", "default": "0x00000000", "description": "SubChannelMixerScratchRInputGain"}
 {"page": "0x1D", "subaddr": "0x7C", "name": "BassMonoLeft", "bytes": 4, "format": "9.23", "default": "0x00800000", "description": "MonoLeftInputGain"}
-{"page": "0x1E", "subaddr": "0x08", "name": "BassMonoRight", "bytes": 4, "format": "9.23", "default": "0x00800000", "description": "MonoRightInputGain"}
+{"page": "0x1E", "subaddr": "0x08", "name": "BassMonoRight", "bytes": 4, "format": "9.23", "default": "0x00000000", "description": "MonoRightInputGain"}
 {"page": "0x1E", "subaddr": "0x0C", "name": "BassMonoSub", "bytes": 4, "format": "9.23", "default": "0x00000000", "description": "MonoSubInputGain"}
 {"type": "section", "title": "SPATIALIZER LEVEL"}
 {"page": "0x1E", "subaddr": "0x10", "name": "SpatializerLevel", "bytes": 4, "format": "9.23", "default": "0x00000000", "description": "SpatializerLevelcoefficient"}

@@ -11,7 +11,7 @@ from .input_mixer_tab import InputMixerTab
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("TAS3251 EQ Designer")
+        self.setWindowTitle("Black Horse Sound Designer")
         self.resize(1100, 700)
 
         tabs = QtWidgets.QTabWidget(self)
