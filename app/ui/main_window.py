@@ -6,6 +6,7 @@ from .crossover_tab import CrossoverTab
 from .coef_check_tab import CoefCheckTab
 from .exporter import export_pf5_from_ui
 from .input_mixer_tab import InputMixerTab
+from .journal_tab import JournalTab
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -29,6 +30,9 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.coef_tab = CoefCheckTab(self)
         tabs.addTab(self.coef_tab, "Coef Check")
+
+        self.journal_tab = JournalTab(self)
+        tabs.addTab(self.journal_tab, "Device Journal")
 
         # Toolbar with Export action
         tb = self.addToolBar('Main')
