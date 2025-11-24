@@ -15,7 +15,10 @@ class JournalTab(QtWidgets.QWidget):
         self.refresh_btn = QtWidgets.QPushButton("Refresh", self)
         self.auto_btn = QtWidgets.QPushButton("Auto-Detect", self)
         self.connect_btn = QtWidgets.QPushButton("Connect", self)
+        self.readlog_btn = QtWidgets.QPushButton("Read Device Log", self)
         self.status_lbl = QtWidgets.QLabel("Disconnected", self)
+        self.hint_lbl = QtWidgets.QLabel("I2C uses 7-bit addresses. ES9821 default: 0x20 (8-bit write 0x40)", self)
+        self.hint_lbl.setStyleSheet("color: gray; font-size: 11px;")
 
         top = QtWidgets.QHBoxLayout()
         top.addWidget(QtWidgets.QLabel("Port:"))
@@ -23,6 +26,7 @@ class JournalTab(QtWidgets.QWidget):
         top.addWidget(self.refresh_btn)
         top.addWidget(self.auto_btn)
         top.addWidget(self.connect_btn)
+        top.addWidget(self.readlog_btn)
         top.addWidget(self.status_lbl)
 
         # Middle row: type/id inputs and actions
@@ -50,6 +54,7 @@ class JournalTab(QtWidgets.QWidget):
 
         root = QtWidgets.QVBoxLayout(self)
         root.addLayout(top)
+        root.addWidget(self.hint_lbl)
         root.addLayout(mid)
         root.addWidget(self.output, 1)
 
@@ -59,6 +64,7 @@ class JournalTab(QtWidgets.QWidget):
         self.connect_btn.clicked.connect(self._on_connect)
         self.jrd_btn.clicked.connect(self._on_jrd)
         self.jrdb_btn.clicked.connect(self._on_jrdb)
+        self.readlog_btn.clicked.connect(self._on_readlog)
 
         # Initial
         self._on_refresh()
@@ -173,6 +179,16 @@ class JournalTab(QtWidgets.QWidget):
             self.output.setPlainText("ERR JNF (no record)")
             return
         self._display_bytes(data, note="JRDB")
+
+    def _on_readlog(self):
+        if not self._ensure_link():
+            return
+        lines = self._link.read_lines(1.0)
+        if not lines:
+            self.output.appendPlainText("[log] (no lines)\n")
+            return
+        for ln in lines:
+            self.output.appendPlainText(f"[log] {ln}")
 
     def _display_bytes(self, data: bytes, note: str = ""):
         # Render as hex, grouped binary with offsets, and ASCII preview

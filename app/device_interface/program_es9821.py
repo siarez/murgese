@@ -108,7 +108,7 @@ def load_es9821_pairs(jsonl_path: Path) -> List[Tuple[int, int]]:
                 continue
             pairs.append((addr, val))
     # sort by address, stable
-    pairs.sort(key=lambda t: t[0])
+    # pairs.sort(key=lambda t: t[0])
     return pairs
 
 
@@ -177,7 +177,7 @@ def main(argv: List[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description="Convert ES9821 JSONL to journal payload and send via CDC !jwrb")
     ap.add_argument("--jsonl", required=True, type=Path, help="Path to es9821_registers.jsonl")
     ap.add_argument("--port", "-p", help="Serial port (e.g., /dev/tty.usbmodemXXXX)")
-    ap.add_argument("--addr", type=lambda s: int(s, 0), default=0x40, help="ES9821 7-bit I2C addr (default 0x40)")
+    ap.add_argument("--addr", type=lambda s: int(s, 0), default=0x20, help="ES9821 7-bit I2C addr (default 0x20; 8-bit write is 0x40)")
     ap.add_argument("--type", type=lambda s: int(s, 0), default=0x21, help="Journal type (default 0x21)")
     ap.add_argument("--id", type=lambda s: int(s, 0), default=0x00, help="Journal id (default 0x00)")
     ap.add_argument("--out", type=Path, help="Optional output file to write binary payload")
@@ -187,6 +187,11 @@ def main(argv: List[str] | None = None) -> int:
 
     if not args.jsonl.exists():
         print(f"JSONL not found: {args.jsonl}", file=sys.stderr)
+        return 2
+
+    # Validate 7-bit address
+    if args.addr < 0x00 or args.addr > 0x7F:
+        print(f"Invalid I2C 7-bit address: {args.addr:#x}", file=sys.stderr)
         return 2
 
     pairs = load_es9821_pairs(args.jsonl)
@@ -225,11 +230,22 @@ def main(argv: List[str] | None = None) -> int:
     link = None
     try:
         link = CdcLink(port)
-        ok = link.jwrb(args.type, args.id, payload)
+        ok, pre_lines = link.jwrb_with_log(args.type, args.id, payload)
         if not ok:
             print("Failed to write journal payload (jwrb)", file=sys.stderr)
             return 7
         print("OK: journal write committed (OK JWR)")
+        # Try to read any apply-status lines emitted by firmware
+        applies = [ln for ln in pre_lines if ln.startswith("OK APPLY") or ln.startswith("ERR APPLY")]
+        if not applies:
+            post_lines = link.read_lines(1.0)
+            applies = [ln for ln in post_lines if ln.startswith("OK APPLY") or ln.startswith("ERR APPLY")]
+        if applies:
+            for ln in applies:
+                print(ln)
+        else:
+            # Optional: print any other lines for debugging
+            pass
         return 0
     finally:
         if link is not None:

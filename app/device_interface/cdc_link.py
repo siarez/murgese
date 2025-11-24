@@ -172,6 +172,39 @@ class CdcLink:
                 status = ln; break
         return status == "OK JWR"
 
+    def jwrb_with_log(self, typ: int, _id: int, payload: bytes, ready_timeout: float = DEFAULT_TIMEOUT) -> tuple[bool, list[str]]:
+        """Like jwrb(), but returns any lines seen while waiting (including APPLY)."""
+        lines: list[str] = []
+        if not payload:
+            return False, lines
+        self.ser.reset_input_buffer()
+        self._write_line(f"!jwrb {typ:#x} {_id:#x} {len(payload)}")
+        # Wait for READY
+        t0 = time.time(); ready = False
+        while time.time() - t0 < ready_timeout:
+            ln = self._read_line()
+            if not ln:
+                continue
+            lines.append(ln)
+            if ln.startswith("OK JWRB READY"):
+                ready = True; break
+            if ln.startswith("ERR"):
+                return False, lines
+        if not ready:
+            return False, lines
+        # Send payload and wait for final status
+        self.ser.write(payload)
+        self.ser.flush()
+        t0 = time.time(); status = ""
+        while time.time() - t0 < (DEFAULT_TIMEOUT * 5):
+            ln = self._read_line()
+            if not ln:
+                continue
+            lines.append(ln)
+            if ln in ("OK JWR", "ERR JWR"):
+                status = ln; break
+        return status == "OK JWR", lines
+
     # ------------ Optional helpers mirrored from host tester ------------
     def init(self) -> bool:
         self._write_line("!ei")
@@ -270,3 +303,19 @@ class CdcLink:
             return b"".join(chunks)
         finally:
             self.ser.timeout = old_timeout
+
+    def read_lines(self, duration: float = 0.5) -> list[str]:
+        """Read and return lines for up to 'duration' seconds (non-blocky)."""
+        end_time = time.time() + max(0.0, duration)
+        old_timeout = self.ser.timeout
+        lines: list[str] = []
+        try:
+            self.ser.timeout = 0.05
+            while time.time() < end_time:
+                ln = self._read_line()
+                if not ln:
+                    continue
+                lines.append(ln)
+        finally:
+            self.ser.timeout = old_timeout
+        return lines
